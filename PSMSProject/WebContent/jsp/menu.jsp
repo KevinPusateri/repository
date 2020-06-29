@@ -1,6 +1,7 @@
 
 <%@page import="java.util.Calendar"%>
 
+<%@include file="head.jsp"%>
 
 <%@ page import="java.text.*,java.util.*" session="true"%>
 <header class="mdl-layout__header">

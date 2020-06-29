@@ -52,6 +52,5 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>19.6.0.0</version>
 		</dependency>
-
 	</dependencies>
 ```
