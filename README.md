@@ -2,30 +2,30 @@
 
 Dynamic Web Project with Maven
 
-####src
--DataSourceFactory.java
--Dao.java
--DaoStuff.java
--Stuff.java
--StuffDao.java
--StuffController.java
+#### SRC
+- DataSourceFactory.java
+- Dao.java
+- DaoStuff.java
+- Stuff.java
+- StuffDao.java
+- StuffController.java
 
-####resources
-database.properties
+#### RESOURCES
+- database.properties
 
-####JSP:
--head.jsp
--menu.jsp;
--stuffForm.jsp
--stuffList.jsp
+#### JSP:
+- head.jsp
+- menu.jsp;
+- stuffForm.jsp
+- stuffList.jsp
 
-####css
+#### CSS
 -styles.css
 
 ####Tools
--Apache Tomcat 9.0
--Maven
--Oracle Sql Developer
+- Apache Tomcat 9.0
+- Maven
+- Oracle Sql Developer
 
 
 #### pom.xml
