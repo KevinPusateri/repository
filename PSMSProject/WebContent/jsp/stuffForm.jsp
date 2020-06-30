@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <! doctype html>
 <html lang="en">
-<%@include file="head.jsp"%>
 <body>
 	<div class="mdl-Layout mdl-js-layout mdl-layout--fixed-header">
 		<%@include file="menu.jsp"%>
@@ -21,10 +20,10 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<c:if test="${stuff != null}">
-								<form name="myForm" action="../StuffController?op=update" method="post" onsubmit="return validateForm()">
+								<form name="myForm" action="/PSMSProject/StuffController?op=update" method="post" onsubmit="return validateForm()">
 							</c:if>
 							<c:if test="${stuff == null}">
-								<form name="myForm" action="../StuffController?op=insert" method="post" onsubmit="return validateForm()">
+								<form name="myForm" action="/PSMSProject/StuffController?op=insert" method="post" onsubmit="return validateForm()">
 							</c:if>
 							<c:if test="${stuff != null}">
 								<input type="hidden" name="id"

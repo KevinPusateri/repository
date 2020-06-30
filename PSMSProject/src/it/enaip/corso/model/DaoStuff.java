@@ -35,7 +35,7 @@ public class DaoStuff implements StuffDao {
 		if (resultSet.next()) {
 			id_stuff = resultSet.getInt("stuff_id");
 			name = resultSet.getString("name");
-			description = resultSet.getString("desctiption");
+			description = resultSet.getString("description");
 			quantity = resultSet.getInt("quantity");
 			location = resultSet.getString("location");
 		}
@@ -53,7 +53,7 @@ public class DaoStuff implements StuffDao {
 		while (resultSet.next()) {
 			int id = resultSet.getInt("stuff_id");
 			String name = resultSet.getString("name");
-			String description = resultSet.getString("desctiption");
+			String description = resultSet.getString("description");
 			int quantity = resultSet.getInt("quantity");
 			String location = resultSet.getString("location");
 

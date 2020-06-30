@@ -1,10 +1,7 @@
-<%@ page language="Java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
-<%@include file="head.jsp"%>
 <body>
 	<!-- Always shows a header, even in smaller screens. -->
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -37,9 +34,9 @@
 										<td><c:out value="${stuff.description}" /></td>
 										<td><c:out value="${stuff.quantity}" /></td>
 										<td><c:out value="${stuff.location}" /></td>
-										<td><a href="/PSMS/edit?id=<c:out value='${stuff.id}' />">Edit</a>
+										<td><a href="/PSMSProject/StuffController?op=edit&id=<c:out value='${stuff.id}' />">Edit</a>
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="/PSMS/delete?id=<C:out value='${stuff.id}' />">Delete</a>
+											<a href="/PSMSProject/StuffController?op=delete&id=<c:out value='${stuff.id}' />">Delete</a>
 										</td>
 									</tr>
 								</c:forEach>

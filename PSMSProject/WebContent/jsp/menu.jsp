@@ -1,7 +1,6 @@
-
+<%@include file="head.jsp"%>
 <%@page import="java.util.Calendar"%>
 
-<%@include file="head.jsp"%>
 
 <%@ page import="java.text.*,java.util.*" session="true"%>
 <header class="mdl-layout__header">
@@ -17,17 +16,16 @@
 		</h5>
 
 		<nav class="mdl-navigation mdl-layout--large-screen-only">
-			<a class="mdl-navigation__link" href="../StuffController?op=new">Add new staff</a> <a
-				class="mdl-navigation__link" href="../StuffController?op=list">List new staff</a>
+			<a class="mdl-navigation__link" href="/PSMSProject//StuffController?op=new">Add new stuff</a> <a
+				class="mdl-navigation__link" href="/PSMSProject//StuffController?op=list">List new stuff</a>
 		</nav>
 	</div>
 </header>
-
 <div class="mdl-layout__drawer">
 	<span class="mdl-layout-title">PSMS</span>
 	<nav class="mdl-navigation">
-		<a class="mdl-navigation__link" href="../StuffController?op=new">Add new stuff</a> <a
-			class="mdl-navigation__link" href="../StuffController?op=list">List all stuff</a>
+		<a class="mdl-navigation__link" href="/PSMSProject//StuffController?op=new">Add new stuff</a> <a
+			class="mdl-navigation__link" href="/PSMSProject//StuffController?op=list">List all stuff</a>
 
 	</nav>
 </div>

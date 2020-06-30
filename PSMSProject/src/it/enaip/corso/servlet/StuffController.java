@@ -60,19 +60,20 @@ public class StuffController extends HttpServlet {
 
 	private void updateStuff(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		int id = Integer.parseInt(req.getParameter("stuff_id"));
+		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
 		String description = req.getParameter("description");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		String location = req.getParameter("location");
 		Stuff stuff = new Stuff(id, name, description, quantity, location);
 		StuffDao.update(stuff);
-		resp.sendRedirect("list");
+		listStuff(req,resp);
+
 	}
 
 	private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		String id = req.getParameter("stuff_id");
+		String id = req.getParameter("id");
 		Optional<Stuff> existingStuff = StuffDao.find(id);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/stuffForm.jsp");
 		existingStuff.ifPresent(s -> req.setAttribute("stuff", s));
@@ -81,10 +82,10 @@ public class StuffController extends HttpServlet {
 
 	private void deleteStuff(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		int id = Integer.parseInt(req.getParameter("stuff_id"));
+		int id = Integer.parseInt(req.getParameter("id"));
 		Stuff stuff = new Stuff(id);
 		StuffDao.delete(stuff);
-		resp.sendRedirect("list");
+		listStuff(req,resp);
 
 	}
 
@@ -101,18 +102,20 @@ public class StuffController extends HttpServlet {
 		List<Stuff> listStuff = StuffDao.findAll();
 		req.setAttribute("listStuff", listStuff);
 		dispatcher.forward(req, resp);
+
 	}
 
 	private void insertStuff(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-
+		
 		String name = req.getParameter("name");
 		String description = req.getParameter("description");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		String location = req.getParameter("location");
 		Stuff stuff = new Stuff(name, description, quantity, location);
 		StuffDao.save(stuff);
-		resp.sendRedirect("list");
+		listStuff(req,resp);
+
 	}
 
 }
