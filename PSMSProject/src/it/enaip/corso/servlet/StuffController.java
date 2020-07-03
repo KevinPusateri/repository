@@ -92,7 +92,6 @@ public class StuffController extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
-		resp.getWriter().append(op);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/stuffForm.jsp");
 		dispatcher.forward(req, resp);
 
