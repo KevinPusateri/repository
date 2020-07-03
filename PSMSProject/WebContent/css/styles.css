@@ -22,3 +22,14 @@
 .mdl-grid.center-items {
 	justify-content: center;
 }
+
+#link-container {
+    text-align: center;
+}
+#menu {
+    background: blue;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    padding: 10px;
+}

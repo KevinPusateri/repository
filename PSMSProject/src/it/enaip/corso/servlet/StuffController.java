@@ -20,17 +20,18 @@ import it.enaip.corso.model.Stuff;
 @WebServlet(name = "StuffController", urlPatterns = { "/StuffController" })
 public class StuffController extends HttpServlet {
 
-	public static final long SERIALVERSIONUID = 1L;
+	private String op;
+	private static final long serialVersionUID = 1L;
 	private DaoStuff StuffDao = DaoStuff.getInstance();
 	private static final Logger LOGGER = Logger.getLogger(StuffController.class.getName());
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String op = req.getParameter("op");
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		op = req.getParameter("op");
 		try {
 			switch(op) {
 			case "new":
@@ -91,6 +92,7 @@ public class StuffController extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
+		resp.getWriter().append(op);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/stuffForm.jsp");
 		dispatcher.forward(req, resp);
 

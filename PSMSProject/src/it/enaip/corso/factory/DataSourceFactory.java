@@ -1,12 +1,13 @@
 package it.enaip.corso.factory;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +16,12 @@ import javax.sql.DataSource;
 
 import oracle.jdbc.pool.OracleDataSource;
 
-public class DataSourceFacotry {
+public class DataSourceFactory {
 
 	private final DataSource daso;
-	private static final Logger LOGGER = Logger.getLogger(DataSourceFacotry.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DataSourceFactory.class.getName());
 
-	public DataSourceFacotry() {
+	public DataSourceFactory() {
 		OracleDataSource daso = null;
 		try {
 			daso = new OracleDataSource();
@@ -28,7 +29,6 @@ public class DataSourceFacotry {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-//			String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("./resources/database.properties")).getPath();
 		InputStream input = null;
 
 		try {
@@ -69,6 +69,54 @@ public class DataSourceFacotry {
 	}
 
 	private static class SingletonHelper {
-		private static final DataSourceFacotry INSTANCE = new DataSourceFacotry();
+		private static final DataSourceFactory INSTANCE = new DataSourceFactory();
+	}
+
+	public static void closeConnection(Connection conn) {
+		try {
+			if (null != conn) {
+				conn.close();
+				conn = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	public static void closeResultset(ResultSet rs) {
+		try {
+			if (null != rs) {
+				rs.close();
+				rs = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	public static void closePreparedStatement(PreparedStatement pstmt) {
+		try {
+			if (null != pstmt) {
+				pstmt.close();
+				pstmt = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	public static void closeStatement(Statement stmt) {
+		try {
+			if (null != stmt) {
+				stmt.close();
+				stmt = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
 	}
 }

@@ -8,7 +8,7 @@ public interface Dao<T,ID> {
 
 	Optional<T> find(ID id)throws SQLException;;
 	
-	List<T> findALL() throws SQLException;
+	List<T> findAll() throws SQLException;
 	
 	boolean save(T o)throws SQLException;;
 	

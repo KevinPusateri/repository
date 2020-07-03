@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import it.enaip.corso.factory.DataSourceFacotry;
+import it.enaip.corso.factory.DataSourceFactory;
 
 public class DaoStuff implements StuffDao {
 
@@ -26,7 +26,7 @@ public class DaoStuff implements StuffDao {
 		String sql = "SELECT stuff_id,name,description,quantity,location FROM stuff WHERE stuff_id=?";
 		int id_stuff = 0, quantity = 0;
 		String name = "", description = "", location = "";
-		Connection conn = DataSourceFacotry.getConnection();
+		Connection conn = DataSourceFactory.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, id);
@@ -42,11 +42,12 @@ public class DaoStuff implements StuffDao {
 		return Optional.of(new Stuff(id_stuff, name, description, quantity, location));
 	}
 
+	@Override
 	public List<Stuff> findAll() throws SQLException {
 		List<Stuff> listStuff = new ArrayList<Stuff>();
 		String sql = "SELECT stuff_id,name,description,quantity,location FROM stuff";
 
-		Connection conn = DataSourceFacotry.getConnection();
+		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery(sql);
 
@@ -68,7 +69,7 @@ public class DaoStuff implements StuffDao {
 	public boolean save(Stuff stuff) throws SQLException {
 		String sql = "INSERT INTO stuff (name, description, quantity, location) VALUES(?,?,?,?)";
 		boolean rowInserted = false;
-		Connection conn = DataSourceFacotry.getConnection();
+		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, stuff.getName());
 		statement.setString(2, stuff.getDescription());
@@ -85,7 +86,7 @@ public class DaoStuff implements StuffDao {
 		sql += "WHERE stuff_id=?";
 
 		boolean rowUpdated = false;
-		Connection conn = DataSourceFacotry.getConnection();
+		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, stuff.getName());
 		statement.setString(2, stuff.getDescription());
@@ -102,18 +103,12 @@ public class DaoStuff implements StuffDao {
 		String sql = "DELETE FROM stuff WHERE stuff_id = ?";
 		boolean rowDeleted = false;
 		
-		Connection conn = DataSourceFacotry.getConnection();
+		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setInt(1, stuff.getId());
 		rowDeleted = statement.executeUpdate() > 0;
 		
 		return rowDeleted;
-	}
-
-	@Override
-	public List<Stuff> findALL() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

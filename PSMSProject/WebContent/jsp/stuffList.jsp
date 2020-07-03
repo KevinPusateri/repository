@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
+<head><title>List</title></head>
 <body>
 	<!-- Always shows a header, even in smaller screens. -->
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
