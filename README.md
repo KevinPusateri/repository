@@ -1,6 +1,31 @@
-# repository
+# PSMSProject
 
+Dynamic Web Project with Maven
 
+#### SRC
+- DataSourceFactory.java
+- Dao.java
+- DaoStuff.java
+- Stuff.java
+- StuffDao.java
+- StuffController.java
+
+#### RESOURCES
+- database.properties
+
+#### JSP:
+- head.jsp
+- menu.jsp;
+- stuffForm.jsp
+- stuffList.jsp
+
+#### CSS
+-styles.css
+
+####Tools
+- Apache Tomcat 9.0
+- Maven
+- Oracle Sql Developer
 
 
 #### pom.xml
