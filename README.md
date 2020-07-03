@@ -1,81 +1,39 @@
 # PSMSProject
 
-Dynamic Web Project with Maven
+1. Create a maven web project
+2. Integrate within the project, with appropriate maven plugins for builds, a JSP Web application for the front-end
+3.  Prepare unit tests with Junit
+4 Run the tests, debug the tests, positioning the breakpoint on the assertion instruction
+5 Run the test via maven 3.5+ both via IDE and via command line
 
-#### SRC
-- DataSourceFactory.java
-- Dao.java
-- DaoStuff.java
-- Stuff.java
-- StuffDao.java
-- StuffController.java
-
-#### RESOURCES
-- database.properties
-
-#### JSP:
-- head.jsp
-- menu.jsp;
-- stuffForm.jsp
-- stuffList.jsp
-
-#### CSS
--styles.css
-
-####Tools
-- Apache Tomcat 9.0
-- Maven
-- Oracle Sql Developer
+#### Prerequisites
+Setup Software |
+------------ |
+Oracle JDK 8 |
+Eclipse IDE |
+Apache Tomcat 9.0 |
+Oracle Express 11g |
+Oracle SQL Developer |
 
 
-#### pom.xml
-- dependencies:
-```sh
-<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.3</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat</artifactId>
-			<version>9.0.35</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-			<scope>compile</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
-		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>19.6.0.0</version>
-		</dependency>
-	</dependencies>
-```
+#### Installing
+dependency maven |
+------------ |
+junit 4 |
+javax.servlet |
+javax.servlet.jsp |
+org.mockito |
+org.apache.tomcat |
+jstl |
+taglibs |
+com.oracle.database.jdbc |
+net.sourceforge.jwebunit |
+org.slf4j |
+log4j |
+
+#### Running the tests
+Test the web project via Jwebunit the servlet and CRUD applications with asserts.
+Run the test via maven 3.5+ via command line: mvn clean install.
+
+#### Built With
+* Maven - Dependency Management
