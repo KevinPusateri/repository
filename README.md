@@ -36,7 +36,7 @@ log4j | per l'utilizzio di Logger
 Kevin | Jeffrey
 ------------ | -----------
 Creazione e sviluppo di classi java per gli utenti e la servlet per la loro gestione  | Si occuperà di oracle Sql sulla creazione delle tabelle e query e del DB di test
-Documentazione delle scelte decise insieme e dei passi svolti | Creazione e sviluppo di | Creazione e sviluppo del progetto front-end: form e liste.
+Documentazione delle scelte decise insieme e dei passi svolti | Creazione e sviluppo del progetto lato front-end(html, jsp): form e liste.
 
 Passi svolti
 - Kevin:
