@@ -19,7 +19,7 @@ Oracle SQL Developer |
 
 #### Installing
 dependency maven | motivazione
------------- |
+------------ | -------------
 junit 4 | testare servlet
 javax.servlet | utilizzo della servlet
 javax.servlet.jsp | utilizzo dei file jsp
