@@ -63,15 +63,11 @@
 									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="type"
-										value="<c:out value='${user.type}' />" id="type" /> <label
+									<input class="mdl-textfield__input" type="number" name="age"
+										value="<c:out value='${user.age}' />" id="age" /> <label
 										class="mdl-textfield__label" for="age">Age</label>
 								</div>
-								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="type"
-										value="<c:out value='${user.type}' />" id="type" /> <label
-										class="mdl-textfield__label" for="id">Id</label>
-								</div>
+								
 								<!-- Text input-->
 
 								<label for="type">Choose a Type</label> <select name="type"
