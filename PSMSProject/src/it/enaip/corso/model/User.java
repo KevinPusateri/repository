@@ -3,19 +3,19 @@ package it.enaip.corso.model;
 public class User {
 
 	public enum Type {
-		CHILD('C'), OWNER('O'), SPOUSE('S');
+		CHILD("C"), OWNER("O"), SPOUSE("S");
 
-		protected char descType;
+		protected String descType;
 
-		Type(char descType) {
+		Type(String descType) {
 			this.descType = descType;
 		}
 
-		public char getDescType() {
+		public String getDescType() {
 			return descType;
 		}
 
-		public void setDescType(char descType) {
+		public void setDescType(String descType) {
 			this.descType = descType;
 		}
 		

@@ -115,5 +115,10 @@
 			<artifactId>dexmaker</artifactId>
 			<version>1.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.skyscreamer</groupId>
+			<artifactId>jsonassert</artifactId>
+			<version>1.5.0</version>
+		</dependency>
 	</dependencies>
 </project>

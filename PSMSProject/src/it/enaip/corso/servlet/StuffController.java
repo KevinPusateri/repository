@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.enaip.corso.cruddao.DaoStuff;
+import it.enaip.corso.cruddao.DaoUser;
+import it.enaip.corso.cruddao.UserDao;
 import it.enaip.corso.model.Stuff;
 import it.enaip.corso.model.User;
 import it.enaip.corso.model.User.Type;
@@ -36,15 +38,6 @@ public class StuffController extends HttpServlet {
 		op = req.getParameter("op");
 		try {
 			switch(op) {
-			case "newUser":
-				showFormUser(req, resp);
-				break;
-			case "insertUser":
-				insertUser(req, resp);
-				break;
-			case "listUser":
-				insertUser(req, resp);
-				break;
 			case "new":
 				showNewForm(req, resp);
 				break;
@@ -69,24 +62,6 @@ public class StuffController extends HttpServlet {
 		}
 
 	}
-
-	private void showFormUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userForm.jsp");
-		dispatcher.forward(req, resp);
-	}
-	
-	private void insertUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		String surname = req.getParameter("surname");
-		String birthDate = req.getParameter("birthDate");
-		int age = Integer.parseInt(req.getParameter("age"));
-		String type = req.getParameter("type");
-		
-		User user = new User(name, surname, birthDate, age, Type.valueOf(type));
-//		StuffDao.save(user);
-//		listUser(req,resp);
-	}
-	
 
 	private void updateStuff(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, SQLException {
@@ -116,7 +91,6 @@ public class StuffController extends HttpServlet {
 		Stuff stuff = new Stuff(id);
 		StuffDao.delete(stuff);
 		listStuff(req,resp);
-
 	}
 
 	private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
