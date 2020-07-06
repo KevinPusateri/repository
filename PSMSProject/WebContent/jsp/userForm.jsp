@@ -30,8 +30,8 @@
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=insertUser" method="post"
-										onsubmit="return validateForm()">
+										action="/PSMSProject/StuffController?op=insertUser"
+										method="post" onsubmit="return validateForm()">
 								</c:if>
 								<c:if test="${user != null}">
 									<input type="hidden" name="id"
@@ -44,21 +44,22 @@
 										class="mdl-textfield__label" for="name">Name</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield_input" type="text"
-										name="surname" value="<c:out value='${user.surname}' />"
-										id="surname" /> <label class="mdl-textfield__label"
-										for="surname">Surname</label>
+									<input class="mdl-textfield_input" type="text" name="surname"
+										value="<c:out value='${user.surname}' />" id="surname" /> <label
+										class="mdl-textfield__label" for="surname">Surname</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<c:choose>
 										<c:when test="${user != null }">
-											<input class="mdl-textfield__input" type="text"
-												name="birthdate" value="<c:out value='${user.birthDate}' />"
-												id="birthdate" />
+											<label for="start">Start date:</label>
+
+											<input type="date" id="start" name="trip-start"
+												value="2020-6-7" min="2020-1-30" max="2018-12-31">
+
 										</c:when>
 										<c:otherwise>
-											<input class="mdl-textfield__input" type="text" name="birthdate"
-												value="<c:out value=''/>" id="birthdate" />
+											<input class="mdl-textfield__input" type="text"
+												name="birthdate" value="<c:out value=''/>" id="birthdate" />
 										</c:otherwise>
 									</c:choose>
 									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
