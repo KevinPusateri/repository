@@ -25,12 +25,12 @@
 							<div class="mdl-card__supporting-text">
 								<c:if test="${user != null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=update" method="post"
+										action="/PSMSProject/UserController?op=update" method="post"
 										onsubmit="return validateForm()">
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=insertUser"
+										action="/PSMSProject/UserController?op=insert"
 										method="post" onsubmit="return validateForm()">
 								</c:if>
 								<c:if test="${user != null}">
@@ -51,15 +51,13 @@
 								<div class="mdl-textfield mdl-js-textfield">
 									<c:choose>
 										<c:when test="${user != null }">
-											<label for="start">Start date:</label>
-
-											<input type="date" id="start" name="trip-start"
+											<label for="birthdate">BirthDate:</label>
+											<input type="date" id="birthdate" name="birthdate"
 												value="2020-6-7" min="2020-1-30" max="2018-12-31">
-
 										</c:when>
 										<c:otherwise>
-											<input class="mdl-textfield__input" type="text"
-												name="birthdate" value="<c:out value=''/>" id="birthdate" />
+											<input class="mdl-textfield__input" type="date"
+												name="birthdate" id="birthdate" />
 										</c:otherwise>
 									</c:choose>
 									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
@@ -69,19 +67,16 @@
 										value="<c:out value='${user.age}' />" id="age" /> <label
 										class="mdl-textfield__label" for="age">Age</label>
 								</div>
-								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="id"
-										value="<c:out value='${user.id}' />" id="id" /> <label
-										class="mdl-textfield__label" for="id">Id</label>
-								</div>
+								
 								<!-- Text input-->
 
 								<label for="type">Choose a Type</label> <select name="type"
 									id="type" form="userForm">
-									<option value="c">CHILD</option>
-									<option value="o">Owner</option>
-									<option value="s">Spouse</option>
-								</select> <input type="submit"
+									<option value="C">CHILD</option>
+									<option value="O">OWNER</option>
+									<option value="S">SPOUSE</option>
+								</select> 
+								<input type="submit"
 									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 									value="save">
 								</form>
