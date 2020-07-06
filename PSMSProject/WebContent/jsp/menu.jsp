@@ -16,6 +16,7 @@
 		<nav class="mdl-navigation mdl-layout--large-screen-only">
 			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add new stuff</a> 
 			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List new stuff</a>
+			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=user" id="user">Add User</a>
 		</nav>
 	</div>
 </header>
@@ -24,6 +25,6 @@
 	<nav class="mdl-navigation">
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add new stuff</a> 
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List all stuff</a>
-
+		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=user" id="user">Add User</a>
 	</nav>
 </div>

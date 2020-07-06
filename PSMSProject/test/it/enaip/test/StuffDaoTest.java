@@ -13,8 +13,8 @@ import java.sql.Statement;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import it.enaip.corso.cruddao.DaoStuff;
 import it.enaip.corso.factory.DataSourceFactory;
-import it.enaip.corso.model.DaoStuff;
 import it.enaip.corso.model.Stuff;
 
 public class StuffDaoTest extends Mockito{

@@ -21,10 +21,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import it.enaip.corso.cruddao.DaoStuff;
+import it.enaip.corso.cruddao.StuffDao;
 import it.enaip.corso.factory.DataSourceFactory;
-import it.enaip.corso.model.DaoStuff;
 import it.enaip.corso.model.Stuff;
-import it.enaip.corso.model.StuffDao;
 import it.enaip.corso.servlet.StuffController;
 
 public class ServletTest extends Mockito {
