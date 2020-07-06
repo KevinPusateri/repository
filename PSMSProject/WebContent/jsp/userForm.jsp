@@ -49,17 +49,8 @@
 										class="mdl-textfield__label" for="surname">Surname</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<c:choose>
-										<c:when test="${user != null }">
-											<label for="birthdate">BirthDate:</label>
-											<input type="date" id="birthdate" name="birthdate"
-												value="2020-6-7" min="2020-1-30" max="2018-12-31">
-										</c:when>
-										<c:otherwise>
-											<input class="mdl-textfield__input" type="date"
+									<input class="mdl-textfield__input" type="date"
 												name="birthdate" id="birthdate" />
-										</c:otherwise>
-									</c:choose>
 									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
