@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,8 @@
 							<div
 								class="mdl-card_title mdl-color--primary mdl-color-text--white">
 								<h2 class="mdl-card_title-text">
-									<c:if test="${user != null}">Edit Stuff</c:if>
-									<c:if test="${user == null}">Add New Stuff</c:if>
+									<c:if test="${user != null}">Edit User</c:if>
+									<c:if test="${user == null}">Add New User</c:if>
 								</h2>
 							</div>
 							<div class="mdl-card__supporting-text">
@@ -29,7 +30,7 @@
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=user" method="post"
+										action="/PSMSProject/StuffController?op=insertUser" method="post"
 										onsubmit="return validateForm()">
 								</c:if>
 								<c:if test="${user != null}">
@@ -44,20 +45,20 @@
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield_input" type="text"
-										name="description" value="<c:out value='${user.surname}' />"
-										id="description" /> <label class="mdl-textfield__label"
-										for="description">Surname</label>
+										name="surname" value="<c:out value='${user.surname}' />"
+										id="surname" /> <label class="mdl-textfield__label"
+										for="surname">Surname</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<c:choose>
 										<c:when test="${user != null }">
 											<input class="mdl-textfield__input" type="text"
-												name="birthDate" value="<c:out value='${user.birthDate}' />"
-												id="birthDate" />
+												name="birthdate" value="<c:out value='${user.birthDate}' />"
+												id="birthdate" />
 										</c:when>
 										<c:otherwise>
-											<input class="mdl-textfield__input" type="text" name="age"
-												value="<c:out value='${user.birthDate}'/>" id="age" />
+											<input class="mdl-textfield__input" type="text" name="birthdate"
+												value="<c:out value=''/>" id="birthdate" />
 										</c:otherwise>
 									</c:choose>
 									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
@@ -67,7 +68,11 @@
 										value="<c:out value='${user.age}' />" id="age" /> <label
 										class="mdl-textfield__label" for="age">Age</label>
 								</div>
-								
+								<div class="mdl-textfield mdl-js-textfield">
+									<input class="mdl-textfield__input" type="number" name="id"
+										value="<c:out value='${user.id}' />" id="id" /> <label
+										class="mdl-textfield__label" for="id">Id</label>
+								</div>
 								<!-- Text input-->
 
 								<label for="type">Choose a Type</label> <select name="type"
