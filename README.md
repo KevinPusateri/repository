@@ -37,19 +37,20 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
 
 #### Passi svolti
 - Kevin
-  * 6/07/2020
+  #### 6/07/2020
   - Aggiunto classe User.java
   - Aggiunto Servlet UserController.java per la gestione dell'utente
   - Aggiunto DaoUser per salvare, eliminare, aggiornare e trovare l'utente
-  * 7/7/2020
+  #### 7/7/2020
   - Run/Debug DaoUser CRUD:  insert, delete, list degli utenti completati
   - Correzione classe User TimeStamp
   - Correzione campo date userForm.jsp
+
 - Jeffrey
-  * 6/07/2020
+  #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
   - Aggiunto userForm.jsp per registrare l'utente
-  * 7/7/2020
+  #### 7/7/2020
   - Aggiunto userList.jsp
   - Modifica del menu aggiungendo tab per registrare utente e visualizzare la lista
   - Inizio test Json
