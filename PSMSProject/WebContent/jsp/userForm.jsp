@@ -47,8 +47,8 @@
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
-										name="birthdate" id="birthdate" /> <label
-										class="mdl-textfield__label" for="birthdate">BirthDate</label>
+										name="birthDate" id="birthDate" /> <label
+										class="mdl-textfield__label" for="birthDate">BirthDate</label>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="number" name="age"
