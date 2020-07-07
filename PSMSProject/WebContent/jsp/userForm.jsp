@@ -23,12 +23,12 @@
 								<c:if test="${user != null}">
 									<form name="myForm"
 										action="/PSMSProject/UserController?op=update" method="post"
-										onsubmit="return validateForm()">
+										>
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
 										action="/PSMSProject/UserController?op=insert" method="post"
-										onsubmit="return validateForm()">
+										>
 								</c:if>
 								<c:if test="${user != null}">
 									<input type="hidden" name="id"
@@ -77,14 +77,5 @@
 		</div>
 		</main>
 	</div>
-	<script type="text/javascript"> 
-	function validateForm() {
-		var x = document.forms["myForm"]["quantity"].value;
-		if (x== "") {
-			alert("Quantity mustbe filled out");
-			return false;
-		}
-	}
-</script>
 </body>
 </html>
