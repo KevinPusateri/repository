@@ -28,7 +28,7 @@ public class DaoUser implements UserDao {
 	
 	@Override
 	public Optional<User> find(String id) throws SQLException {
-		String sql = "SELECT * FROM stuff WHERE id=?";
+		String sql = "SELECT * FROM users WHERE id=?";
 		int id_user = 0, age = 0;
 		String name = "", surname = "", birthDate = "",type = "";
 		Connection conn = DataSourceFactory.getConnection();
@@ -73,7 +73,7 @@ public class DaoUser implements UserDao {
 
 	@Override
 	public boolean save(User user) throws SQLException {
-		String sql = "INSERT INTO user (name, surname, birthDate, age, type, time) VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO users (name, surname, birthDate, age, type, time) VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
