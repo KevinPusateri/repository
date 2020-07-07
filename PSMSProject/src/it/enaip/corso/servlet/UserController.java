@@ -2,6 +2,10 @@ package it.enaip.corso.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -57,7 +61,7 @@ public class UserController extends HttpServlet {
 				showEditForm(req, resp);
 				break;
 			case "update":
-				updateStuff(req, resp);
+				updateUser(req, resp);
 				break;
 			default:
 				listUser(req, resp);
@@ -65,16 +69,32 @@ public class UserController extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			LOGGER.log(Level.SEVERE, "SQL Error", e);
+		} catch (ParseException e) {
+			LOGGER.log(Level.SEVERE, "Parse Error", e);
+			e.printStackTrace();
 		}
 	}
 
-	private void updateStuff(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
 		int age = Integer.parseInt(req.getParameter("age"));
 		String type = req.getParameter("type");
+		switch (type) {
+		case "C":
+			type = "CHILD";
+			break;
+		case "O":
+			type = "OWNER";
+			break;
+		case "S":
+			type = "SPOUSE";
+			break;
+		default:
+			break;
+		}
 		User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
 		UserDao.update(user);
 		listUser(req,resp);		
@@ -95,12 +115,12 @@ public class UserController extends HttpServlet {
 		listUser(req,resp);		
 	}
 
-	private void insertUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void insertUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException, ParseException {
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
-		int age = Integer.parseInt(req.getParameter("age"));
-		String type = req.getParameter("type");
+        int age = Integer.parseInt(req.getParameter("age"));
+		String type = String.valueOf(req.getParameter("type"));
 		User user = new User(name, surname, birthDate, age, Type.valueOf(type));
 		UserDao.save(user);
 		listUser(req,resp);

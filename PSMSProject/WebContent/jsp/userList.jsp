@@ -35,7 +35,7 @@
 										<td><c:out value="${user.surname}" /></td>
 										<td><c:out value="${user.birthDate}" /></td>
 										<td><c:out value="${user.age}" /></td>
-										<td><c:out value="${user.type}" /></td>
+										<td><c:out value="${user.type.descType}" /></td>
 										<td><a href="/PSMSProject/UserController?op=edit&id=<c:out value='${user.id}' />">Edit</a>
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<a href="/PSMSProject/UserController?op=delete&id=<c:out value='${user.id}' />">Delete</a>

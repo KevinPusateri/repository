@@ -1,5 +1,7 @@
 package it.enaip.corso.model;
 
+import java.sql.Timestamp;
+
 public class User {
 
 	public enum Type {
@@ -27,6 +29,7 @@ public class User {
 	protected String birthDate;
 	protected int age;
 	protected Type type;
+	Timestamp sqlTimestamp;
 	
 	public User() {}
 	
@@ -45,6 +48,7 @@ public class User {
 		this.birthDate = birthDate;
 		this.age = age;
 		this.type = type;
+		this.sqlTimestamp = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getId() {
@@ -94,5 +98,14 @@ public class User {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	public Timestamp getSqlTimestamp() {
+		return sqlTimestamp;
+	}
+
+	public void setSqlTimestamp(Timestamp sqlTimestamp) {
+		this.sqlTimestamp = sqlTimestamp;
+	}
+	
 	
 }

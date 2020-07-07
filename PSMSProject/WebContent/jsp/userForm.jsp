@@ -3,16 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <! doctype html>
 <html lang="en">
-<head><title>Form</title></head>
+<head>
+<title>Form</title>
+</head>
 <body>
 	<div class="mdl-Layout mdl-js-layout mdl-layout--fixed-header">
 		<%@include file="menu.jsp"%>
 		<main class="mdl-layout__content">
-		<div class="page-content">
-			<div class="mdl-grid center-items">
-				<div class="mdl-cell mdl-cell--4-col">
-					<div class="mdl-card mdl-shadow--6dp">
-						<div
+			<div class="page-content">
+				<div class="mdl-grid center-items">
+					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-card mdl-shadow--6dp">
+							<div
 								class="mdl-card_title mdl-color--primary mdl-color-text--white">
 								<h2 class="mdl-card_title-text">
 									<c:if test="${user != null}">Edit User</c:if>
@@ -22,13 +24,11 @@
 							<div class="mdl-card__supporting-text">
 								<c:if test="${user != null}">
 									<form name="myForm"
-										action="/PSMSProject/UserController?op=update" method="post"
-										>
+										action="/PSMSProject/UserController?op=update" method="post">
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
-										action="/PSMSProject/UserController?op=insert" method="post"
-										>
+										action="/PSMSProject/UserController?op=insert" method="post">
 								</c:if>
 								<c:if test="${user != null}">
 									<input type="hidden" name="id"
@@ -47,9 +47,11 @@
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
-										name="birthDate" id="birthDate" /> <label
-										class="mdl-textfield__label" for="birthDate">BirthDate</label>
+										name="birthDate" value="<c:out value='${user.birthDate}' />"
+										id="birthDate" /> <label class="mdl-textfield__label"
+										for="birthDate">BirthDate</label>
 								</div>
+
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="number" name="age"
 										value="<c:out value='${user.age}' />" id="age" /> <label
@@ -59,22 +61,21 @@
 								<!-- Text input-->
 								<div class="mdl-textfield mdl-js-textfield">
 									<label for="type">Choose a Type</label> <select name="type"
-										id="type" form="userForm">
-										<option value="C">CHILD</option>
-										<option value="O">OWNER</option>
-										<option value="S">SPOUSE</option>
+										id="type">
+											<option value="CHILD">CHILD</option>
+											<option value="OWNER">OWNER</option>
+											<option value="SPOUSE">SPOUSE</option>
 									</select>
 								</div>
-
 								<input type="submit"
 									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 									value="save">
-							</form>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</main>
 	</div>
 </body>

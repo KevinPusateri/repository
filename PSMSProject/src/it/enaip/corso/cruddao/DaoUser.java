@@ -17,7 +17,6 @@ import it.enaip.corso.model.User.Type;
 
 public class DaoUser implements UserDao {
 
-	
 	private static class SingletonHelper {
 		private static final DaoUser INSTANCE = new DaoUser();
 	}
@@ -25,14 +24,14 @@ public class DaoUser implements UserDao {
 	public static DaoUser getInstance() {
 		return SingletonHelper.INSTANCE;
 	}
-	
+
 	@Override
 	public Optional<User> find(String id) throws SQLException {
 		String sql = "SELECT * FROM users WHERE id=?";
 		int id_user = 0, age = 0;
-		String name = "", surname = "", birthDate = "",type = "";
+		String name = "", surname = "", birthDate = "", type = "";
 		Connection conn = DataSourceFactory.getConnection();
-		
+
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
@@ -44,6 +43,8 @@ public class DaoUser implements UserDao {
 			birthDate = resultSet.getString("birthDate");
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
+			type = exctratType(type);
+
 		}
 		return Optional.of(new User(id_user, name, surname, birthDate, age, Type.valueOf(type)));
 	}
@@ -51,7 +52,7 @@ public class DaoUser implements UserDao {
 	@Override
 	public List<User> findAll() throws SQLException {
 		List<User> listUser = new ArrayList<User>();
-		String sql = "SELECT * FROM users";
+		String sql = "SELECT id,name,surname,birthDate,age,type FROM users";
 
 		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -65,6 +66,7 @@ public class DaoUser implements UserDao {
 			int age = resultSet.getInt("age");
 			String type = resultSet.getString("type");
 
+			type = exctratType(type);
 			User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
 			listUser.add(user);
 		}
@@ -82,10 +84,7 @@ public class DaoUser implements UserDao {
 		statement.setString(3, user.getBirthDate());
 		statement.setInt(4, user.getAge());
 		statement.setString(5, user.getType().getDescType());
-		String time = "";
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy HH:mm:ss");
-		time = dateFormat.format(new Date());
-		statement.setString(6, time);
+		statement.setTimestamp(6, user.getSqlTimestamp());
 		rowInserted = statement.executeUpdate() > 0;
 
 		return rowInserted;
@@ -94,7 +93,7 @@ public class DaoUser implements UserDao {
 	@Override
 	public boolean update(User user) throws SQLException {
 		String sql = "UPDATE users SET name=?, surname=?, birthDate=?, age=?, type=?, time=?";
-		sql += "WHERE stuff_id=?";
+		sql += "WHERE id=?";
 
 		boolean rowUpdated = false;
 		Connection conn = DataSourceFactory.getConnection();
@@ -104,10 +103,7 @@ public class DaoUser implements UserDao {
 		statement.setString(3, user.getBirthDate());
 		statement.setInt(4, user.getAge());
 		statement.setString(5, user.getType().getDescType());
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy HH:mm:ss");
-		String time = "";
-		time = dateFormat.format(new Date());
-		statement.setString(6, time);
+		statement.setTimestamp(6, user.getSqlTimestamp());
 		statement.setInt(7, user.getId());
 		rowUpdated = statement.executeUpdate() > 0;
 
@@ -122,8 +118,24 @@ public class DaoUser implements UserDao {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setInt(1, user.getId());
 		rowDeleted = statement.executeUpdate() > 0;
-		
+
 		return rowDeleted;
 	}
 
+	private String exctratType(String type) {
+		switch (type) {
+		case "C":
+			type = "CHILD";
+			break;
+		case "O":
+			type = "OWNER";
+			break;
+		case "S":
+			type = "SPOUSE";
+			break;
+		default:
+			break;
+		}
+		return type;
+	}
 }
