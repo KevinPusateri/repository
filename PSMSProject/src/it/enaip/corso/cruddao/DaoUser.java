@@ -62,7 +62,7 @@ public class DaoUser implements UserDao {
 			String name = resultSet.getString("name");
 			String surname = resultSet.getString("surname");
 			String birthDate = resultSet.getString("birthDate");
-			int age = resultSet.getInt("quantity");
+			int age = resultSet.getInt("age");
 			String type = resultSet.getString("type");
 
 			User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
