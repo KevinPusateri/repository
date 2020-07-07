@@ -4,7 +4,7 @@
 <header class="mdl-layout__header">
 
 	<div class="mdl-layout__header-row">
-		<span class="mdl-layout-title"> Personal Stuff</span>
+		<span class="mdl-layout-title"> Personal </span>
 
 		<div class="mdl-layout-spacer"></div>
 		<%
@@ -16,7 +16,8 @@
 		<nav class="mdl-navigation mdl-layout--large-screen-only">
 			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add new stuff</a> 
 			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List new stuff</a>
-			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add User</a>
+			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add new user</a>
+			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List new user</a>
 		</nav>
 	</div>
 </header>
@@ -25,6 +26,7 @@
 	<nav class="mdl-navigation">
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add new stuff</a> 
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List all stuff</a>
-		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add User</a>
+		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add new  user</a>
+		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List new user</a>
 	</nav>
 </div>
