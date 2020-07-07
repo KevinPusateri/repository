@@ -36,7 +36,7 @@ Documentazione delle scelte decise insieme e dei passi svolti | Creazione e svil
 Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare decisioni o correzioni di eventuali problemi 
 
 #### Passi svolti
-- Kevin:
+- Kevin
   * 6/07/2020
   - Aggiunto classe User.java
   - Aggiunto Servlet UserController.java per la gestione dell'utente
@@ -44,8 +44,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   * 7/7/2020
   - Run/Debug DaoUser CRUD:  insert, delete, list degli utenti completati
   - Correzione classe User TimeStamp
+  - Correzione campo date userForm.jsp
 - Jeffrey
- * 6/07/2020
+  * 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
   - Aggiunto userForm.jsp per registrare l'utente
   * 7/7/2020
