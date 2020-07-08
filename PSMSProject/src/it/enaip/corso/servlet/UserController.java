@@ -2,10 +2,7 @@ package it.enaip.corso.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -17,6 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import it.enaip.corso.cruddao.DaoUser;
 import it.enaip.corso.model.User;
@@ -125,6 +126,15 @@ public class UserController extends HttpServlet {
 	private void showNewForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userForm.jsp");
 		dispatcher.forward(req, resp);		
+	}
+	
+	public JSONObject getJson(String id) throws SQLException, JSONException {
+		User user = new User();
+		DaoUser dao = new DaoUser();
+		user = dao.findUser(id);
+		JSONObject jobj = user.getJsonObject();
+		
+		return jobj;
 	}
 	
 	
