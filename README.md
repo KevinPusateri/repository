@@ -25,6 +25,7 @@ com.oracle.database.jdbc | per la connessione a oracle sqlServer
 net.sourceforge.jwebunit | per testare in junit le pagine jsp
 org.slf4j | libreria per interfacciarsi ai sistemi di logging Java
 log4j | per l'utilizzio di Logger
+org.skyscreamer | per l'utilizzo del Json
 
 #### Ruoli
 Kevin | Jeffrey
@@ -45,6 +46,11 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Run/Debug DaoUser CRUD:  insert, delete, list degli utenti completati
   - Correzione classe User TimeStamp
   - Correzione campo date userForm.jsp
+  #### 8/7/2020
+  - Creazione e sviluppo JsonConverteUser.java
+  - Aggiunto metodo getJson() nella Servlet per ottenere oggetto json dell'utente
+  - Aggiunto metodo findUser() su DaoUser per trovare utente specifico da controllare
+  
 
 - Jeffrey
   #### 6/07/2020
@@ -53,7 +59,12 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 7/7/2020
   - Aggiunto userList.jsp
   - Modifica del menu aggiungendo tab per registrare utente e visualizzare la lista
-  - Inizio test Json
+  - Inizio documentazione su Json in rete
+  #### 8/7/2020
+  - Controllo su userForm l'option select per l' update utente
+  - Aggiunto libreria org.skyscreamer per utilizzare il Json
+  - Creazione login.jsp
+  - Creazione UserServletTest per testare su Junit lo UserController.java
 
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
