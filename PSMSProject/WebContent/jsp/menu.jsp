@@ -1,5 +1,4 @@
 <%@include file="head.jsp"%>
-<%@include file="login.jsp" %>
 <%@page import="java.util.Calendar"%>
 <%@ page import="java.text.*,java.util.*" session="true"%>
 <header class="mdl-layout__header">
@@ -19,6 +18,7 @@
 			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List  stuff</a>
 			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add  user</a>
 			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List  user</a>
+			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="login">Login  user</a>
 		</nav>
 	</div>
 </header>
@@ -29,5 +29,6 @@
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List all stuff</a>
 		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add   user</a>
 		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List  user</a>
+		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="login">Login  user</a>
 	</nav>
 </div>
