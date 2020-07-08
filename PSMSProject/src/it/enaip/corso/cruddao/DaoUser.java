@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,8 @@ public class DaoUser implements UserDao {
 	public Optional<User> find(String id) throws SQLException {
 		String sql = "SELECT * FROM users WHERE id=?";
 		int id_user = 0, age = 0;
-		String name = "", surname = "", birthDate = "", type = "";
+		String name = "", surname = "", type = "";
+		Date birthDate = null;
 		Connection conn = DataSourceFactory.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -37,7 +39,7 @@ public class DaoUser implements UserDao {
 			id_user = resultSet.getInt("id");
 			name = resultSet.getString("name");
 			surname = resultSet.getString("surname");
-			birthDate = resultSet.getString("birthDate");
+			birthDate = resultSet.getDate("birthDate");
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
@@ -59,11 +61,12 @@ public class DaoUser implements UserDao {
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
 			String surname = resultSet.getString("surname");
-			String birthDate = resultSet.getString("birthDate");
+			java.sql.Date birthDate = resultSet.getDate("birthDate");
 			int age = resultSet.getInt("age");
 			String type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
 			User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
+
 			listUser.add(user);
 		}
 		return listUser;
@@ -77,7 +80,7 @@ public class DaoUser implements UserDao {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, user.getName());
 		statement.setString(2, user.getSurname());
-		statement.setString(3, user.getBirthDate());
+		statement.setDate(3, new java.sql.Date(user.getBirthDate().getTime()));
 		statement.setInt(4, user.getAge());
 		statement.setString(5, user.getValueType());
 		statement.setTimestamp(6, user.getSqlTimestamp());
@@ -96,7 +99,7 @@ public class DaoUser implements UserDao {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, user.getName());
 		statement.setString(2, user.getSurname());
-		statement.setString(3, user.getBirthDate());
+		statement.setDate(3, new java.sql.Date(user.getBirthDate().getTime()));
 		statement.setInt(4, user.getAge());
 		statement.setString(5, user.getValueType());
 		statement.setTimestamp(6, user.getSqlTimestamp());
@@ -122,7 +125,8 @@ public class DaoUser implements UserDao {
 	public User findUser(String id) throws SQLException {
 		String sql = "SELECT * FROM users WHERE id=?";
 		int id_user = 0, age = 0;
-		String name = "", surname = "", birthDate = "", type = "";
+		String name = "", surname = "", type = "";
+		Date birthDate = null;
 		Connection conn = DataSourceFactory.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -133,7 +137,7 @@ public class DaoUser implements UserDao {
 			id_user = resultSet.getInt("id");
 			name = resultSet.getString("name");
 			surname = resultSet.getString("surname");
-			birthDate = resultSet.getString("birthDate");
+			birthDate = resultSet.getDate("birthDate");
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));

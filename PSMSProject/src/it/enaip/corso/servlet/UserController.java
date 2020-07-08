@@ -3,6 +3,8 @@ package it.enaip.corso.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import it.enaip.corso.cruddao.DaoUser;
 import it.enaip.corso.model.User;
@@ -76,16 +77,16 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-	private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException, ParseException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
 		int age = Integer.parseInt(req.getParameter("age"));
-		String type = req.getParameter("type");
-		type = String.valueOf(User.getEnum(type));
+		String type = String.valueOf(req.getParameter("type"));
 
-		User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
+		User user = new User(id, name, surname, date, age, Type.valueOf(type));
 		UserDao.update(user);
 		listUser(req,resp);		
 	}
@@ -109,9 +110,10 @@ public class UserController extends HttpServlet {
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
-        int age = Integer.parseInt(req.getParameter("age"));
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+		int age = Integer.parseInt(req.getParameter("age"));
 		String type = String.valueOf(req.getParameter("type"));
-		User user = new User(name, surname, birthDate, age, Type.valueOf(type));
+		User user = new User(name, surname, date, age, Type.valueOf(type));
 		UserDao.save(user);
 		listUser(req,resp);
 	}
@@ -137,6 +139,4 @@ public class UserController extends HttpServlet {
 		return jobj;
 	}
 	
-	
-
 }

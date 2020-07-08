@@ -1,6 +1,8 @@
 package it.enaip.corso.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,13 +28,13 @@ public class User {
 
 	}
 
-	protected int id;
-	protected String name;
-	protected String surname;
-	protected String birthDate;
-	protected int age;
-	protected Type type;
-	Timestamp sqlTimestamp;
+	private int id;
+	private String name;
+	private String surname;
+	private Date birthDate;
+	private int age;
+	private Type type;
+	private Timestamp sqlTimestamp;
 
 	public User() {
 	}
@@ -41,12 +43,12 @@ public class User {
 		this.id = id;
 	}
 
-	public User(int id, String name, String surname, String birthDate, int age, Type type) {
+	public User(int id, String name, String surname, Date birthDate, int age, Type type) {
 		this(name, surname, birthDate, age, type);
 		this.id = id;
 	}
 
-	public User(String name, String surname, String birthDate, int age, Type type) {
+	public User(String name, String surname, Date birthDate, int age, Type type) {
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
@@ -79,11 +81,11 @@ public class User {
 		this.surname = surname;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -110,7 +112,12 @@ public class User {
 	public void setSqlTimestamp(Timestamp sqlTimestamp) {
 		this.sqlTimestamp = sqlTimestamp;
 	}
-
+	
+	public String getDateformat() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		return dateFormat.format(birthDate);
+	}
+	
 	public String getValueType() {
 		String ret = "";
 		if (type == null)

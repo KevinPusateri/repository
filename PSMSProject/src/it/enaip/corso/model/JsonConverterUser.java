@@ -1,6 +1,7 @@
 package it.enaip.corso.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +26,9 @@ public class JsonConverterUser {
 			jobj.put("surname", str);
 		}
 
-		str = user.getBirthDate();
-		if (str != null && str.length() > 0) {
-			jobj.put("birthDate", str);
+		Date date = user.getBirthDate();
+		if (date != null) {
+			jobj.put("birthDate", date);
 		}
 
 		in = user.getAge();
@@ -66,8 +67,8 @@ public class JsonConverterUser {
 		}
 		
 		if (json.has("birthDate")) {
-			str = json.get("birthDate").toString();
-			user.setBirthDate(str);
+			Date date = (Date) json.get("birthDate");
+			user.setBirthDate(date);
 		}
 		
 		if (json.has("age")) {

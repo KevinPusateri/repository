@@ -67,7 +67,7 @@
 											<option value="SPOUSE">SPOUSE</option>
 									</select>
 								</div>
-								<input type="myFunction() "
+								<input type="submit"
 									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 									value="save">
 								</form>
