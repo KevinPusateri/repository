@@ -62,12 +62,12 @@
 								<div class="mdl-textfield mdl-js-textfield">
 									<label for="type">Choose a Type</label> <select name="type"
 										id="type">
-											<option value="CHILD">CHILD</option>
-											<option value="OWNER">OWNER</option>
-											<option value="SPOUSE">SPOUSE</option>
+										<option value="CHILD">CHILD</option>
+										<option value="OWNER">OWNER</option>
+										<option value="SPOUSE">SPOUSE</option>
 									</select>
 								</div>
-								<input type="myFunction() "
+								<input type="submit "
 									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 									value="save">
 								</form>
@@ -78,17 +78,5 @@
 			</div>
 		</main>
 	</div>
-	
-	
-	
-	<p id="demo"></p>
-
-<script>
-function myFunction() {
-  var x = document.getElementById("type").options.item(1).text;
-  document.getElementById("demo").innerHTML = x;
-}
-</script>
-	
 </body>
 </html>
