@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,7 @@ public class UserController extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		op = req.getParameter("op");
 		try {
-			switch(op) {
+			switch (op) {
 			case "new":
 				showNewForm(req, resp);
 				break;
@@ -65,6 +66,10 @@ public class UserController extends HttpServlet {
 			case "update":
 				updateUser(req, resp);
 				break;
+
+			case "login":
+				showloginForm(req, resp);
+				break;
 			default:
 				listUser(req, resp);
 				break;
@@ -73,6 +78,9 @@ public class UserController extends HttpServlet {
 			LOGGER.log(Level.SEVERE, "SQL Error", e);
 		} catch (ParseException e) {
 			LOGGER.log(Level.SEVERE, "Parse Error", e);
+			e.printStackTrace();
+		} catch (LoginException e) {
+			LOGGER.log(Level.SEVERE, "Login Exception", e);
 			e.printStackTrace();
 		}
 	}
@@ -88,10 +96,11 @@ public class UserController extends HttpServlet {
 
 		User user = new User(id, name, surname, date, age, Type.valueOf(type));
 		UserDao.update(user);
-		listUser(req,resp);		
+		listUser(req, resp);
 	}
 
-	private void showEditForm(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
+			throws SQLException, ServletException, IOException {
 		String id = req.getParameter("id");
 		Optional<User> existingUser = UserDao.find(id);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userForm.jsp");
@@ -99,14 +108,16 @@ public class UserController extends HttpServlet {
 		dispatcher.forward(req, resp);
 	}
 
-	private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void deleteUser(HttpServletRequest req, HttpServletResponse resp)
+			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		User user = new User(id);
 		UserDao.delete(user);
-		listUser(req,resp);		
+		listUser(req, resp);
 	}
 
-	private void insertUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException, ParseException {
+	private void insertUser(HttpServletRequest req, HttpServletResponse resp)
+			throws SQLException, ServletException, IOException, ParseException {
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
@@ -115,10 +126,11 @@ public class UserController extends HttpServlet {
 		String type = String.valueOf(req.getParameter("type"));
 		User user = new User(name, surname, date, age, Type.valueOf(type));
 		UserDao.save(user);
-		listUser(req,resp);
+		listUser(req, resp);
 	}
 
-	private void listUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+	private void listUser(HttpServletRequest req, HttpServletResponse resp)
+			throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userList.jsp");
 		List<User> listUser = UserDao.findAll();
 		req.setAttribute("listUser", listUser);
@@ -127,16 +139,22 @@ public class UserController extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userForm.jsp");
-		dispatcher.forward(req, resp);		
+		dispatcher.forward(req, resp);
 	}
-	
+
 	public JSONObject getJson(String id) throws SQLException, JSONException {
 		User user = new User();
 		DaoUser dao = new DaoUser();
 		user = dao.findUser(id);
 		JSONObject jobj = user.getJsonObject();
-		
+
 		return jobj;
 	}
-	
+
+	private void showloginForm(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, LoginException {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/login.jsp");
+		dispatcher.forward(req, resp);
+	}
+
 }

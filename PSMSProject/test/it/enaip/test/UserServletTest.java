@@ -18,16 +18,21 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import it.enaip.corso.cruddao.StuffDao;
+import it.enaip.corso.cruddao.UserDao;
 import it.enaip.corso.factory.DataSourceFactory;
-import it.enaip.corso.servlet.StuffController;
+import it.enaip.corso.model.User.Type;
+import it.enaip.corso.servlet.UserController;
 
-public class ServletTest extends Mockito {
-	StuffController myServlet;
-
-	@Mock
-	StuffDao stuffdao;
+public class UserServletTest extends Mockito {
+	UserController myServlet;
 	
+    
+	
+	 
+	
+	@Mock
+	UserDao userdao;
+
 	@Mock
 	HttpServletRequest request;
 
@@ -36,7 +41,8 @@ public class ServletTest extends Mockito {
 
 	@Mock
 	RequestDispatcher dispatcher;
-
+	
+	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
@@ -44,49 +50,49 @@ public class ServletTest extends Mockito {
 
 	@Test
 	public void testShowNewForm() throws IOException, ServletException {
-		myServlet = new StuffController();
+		myServlet = new UserController();
 		when(request.getParameter("op")).thenReturn("new");
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		when(response.getWriter()).thenReturn(printWriter);
-		when(request.getRequestDispatcher("jsp/stuffForm.jsp")).thenReturn(dispatcher);
+		when(request.getRequestDispatcher("jsp/userForm.jsp")).thenReturn(dispatcher);
 		myServlet.doPost(request, response);
 		verify(dispatcher).forward(request, response);
 	}
 
 	@Test
-	public void testListStuff() throws IOException, ServletException {
-		myServlet = new StuffController();
+	public void testListUser() throws IOException, ServletException {
+		myServlet = new UserController();
 		when(request.getParameter("op")).thenReturn("list");
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		when(response.getWriter()).thenReturn(printWriter);
-		when(request.getRequestDispatcher("jsp/stuffList.jsp")).thenReturn(dispatcher);
+		when(request.getRequestDispatcher("jsp/userList.jsp")).thenReturn(dispatcher);
 		myServlet.doPost(request, response);
 		verify(dispatcher).forward(request, response);
 	}
 
 	@Test
-	public void testInsertStuff() throws IOException, ServletException, SQLException {
-		myServlet = new StuffController();
+	public void testInsertUser() throws IOException, ServletException, SQLException {
+		myServlet = new UserController();
 		when(request.getParameter("op")).thenReturn("insert");
-		when(request.getParameter("name")).thenReturn("Kevin");
-		when(request.getParameter("description")).thenReturn("Desc");
-		when(request.getParameter("quantity")).thenReturn("10");
-		when(request.getParameter("location")).thenReturn("l");
-		
-		
+		when(request.getParameter("name")).thenReturn("Jeff");
+		when(request.getParameter("surname")).thenReturn("Desc");
+		when(request.getParameter("birthDate")).thenReturn("1995-07-07");
+		when(request.getParameter("age")).thenReturn("25");
+		when(request.getParameter("type")).thenReturn(Type.CHILD.toString());
+
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		when(response.getWriter()).thenReturn(printWriter);
-		when(request.getRequestDispatcher("jsp/stuffList.jsp")).thenReturn(dispatcher);
+		when(request.getRequestDispatcher("jsp/userList.jsp")).thenReturn(dispatcher);
 		myServlet.doPost(request, response);
 		verify(dispatcher).forward(request, response);
-		
-		String sql = "DELETE FROM stuff WHERE  stuff_id = (SELECT Max(stuff_id) FROM stuff)";
+
+		String sql = "DELETE FROM users WHERE  id = (SELECT Max(id) FROM users)";
 		Connection conn = DataSourceFactory.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.executeUpdate();
-		
 	}
+	 
 }
