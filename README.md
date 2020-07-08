@@ -32,6 +32,7 @@ Kevin | Jeffrey
 ------------ | -----------
 Creazione e sviluppo di classi java per gli utenti e la servlet per la loro gestione  | Creazione delle tabelle, query e del DB di test
 Documentazione delle scelte decise insieme e dei passi svolti | Creazione e sviluppo del progetto lato front-end(html, jsp): form e list.
+Predisporre un test Junit per il GetJson dell'utente | Predisporre test Junit per la UserServletTest con l'utilizzo di Mockito
 
 #### Modalità di meeting
 Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare decisioni o correzioni di eventuali problemi 
