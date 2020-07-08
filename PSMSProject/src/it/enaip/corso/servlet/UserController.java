@@ -83,19 +83,8 @@ public class UserController extends HttpServlet {
 		String birthDate = req.getParameter("birthDate");
 		int age = Integer.parseInt(req.getParameter("age"));
 		String type = req.getParameter("type");
-		switch (type) {
-		case "C":
-			type = "CHILD";
-			break;
-		case "O":
-			type = "OWNER";
-			break;
-		case "S":
-			type = "SPOUSE";
-			break;
-		default:
-			break;
-		}
+		type = String.valueOf(User.getEnum(type));
+
 		User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
 		UserDao.update(user);
 		listUser(req,resp);		

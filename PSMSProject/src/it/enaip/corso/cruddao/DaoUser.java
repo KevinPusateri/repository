@@ -43,7 +43,7 @@ public class DaoUser implements UserDao {
 			birthDate = resultSet.getString("birthDate");
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
-			type = exctratType(type);
+			type = String.valueOf(User.getEnum(type));
 
 		}
 		return Optional.of(new User(id_user, name, surname, birthDate, age, Type.valueOf(type)));
@@ -65,8 +65,7 @@ public class DaoUser implements UserDao {
 			String birthDate = resultSet.getString("birthDate");
 			int age = resultSet.getInt("age");
 			String type = resultSet.getString("type");
-
-			type = exctratType(type);
+			type = String.valueOf(User.getEnum(type));
 			User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
 			listUser.add(user);
 		}
@@ -83,7 +82,7 @@ public class DaoUser implements UserDao {
 		statement.setString(2, user.getSurname());
 		statement.setString(3, user.getBirthDate());
 		statement.setInt(4, user.getAge());
-		statement.setString(5, user.getType().getDescType());
+		statement.setString(5, user.getValueType());
 		statement.setTimestamp(6, user.getSqlTimestamp());
 		rowInserted = statement.executeUpdate() > 0;
 
@@ -102,7 +101,7 @@ public class DaoUser implements UserDao {
 		statement.setString(2, user.getSurname());
 		statement.setString(3, user.getBirthDate());
 		statement.setInt(4, user.getAge());
-		statement.setString(5, user.getType().getDescType());
+		statement.setString(5, user.getValueType());
 		statement.setTimestamp(6, user.getSqlTimestamp());
 		statement.setInt(7, user.getId());
 		rowUpdated = statement.executeUpdate() > 0;
@@ -122,20 +121,4 @@ public class DaoUser implements UserDao {
 		return rowDeleted;
 	}
 
-	private String exctratType(String type) {
-		switch (type) {
-		case "C":
-			type = "CHILD";
-			break;
-		case "O":
-			type = "OWNER";
-			break;
-		case "S":
-			type = "SPOUSE";
-			break;
-		default:
-			break;
-		}
-		return type;
-	}
 }
