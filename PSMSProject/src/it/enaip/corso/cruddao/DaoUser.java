@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,4 +118,27 @@ public class DaoUser implements UserDao {
 		return rowDeleted;
 	}
 
+	
+	public User findUser(String id) throws SQLException {
+		String sql = "SELECT * FROM users WHERE id=?";
+		int id_user = 0, age = 0;
+		String name = "", surname = "", birthDate = "", type = "";
+		Connection conn = DataSourceFactory.getConnection();
+
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, id);
+		ResultSet resultSet = statement.executeQuery();
+
+		if (resultSet.next()) {
+			id_user = resultSet.getInt("id");
+			name = resultSet.getString("name");
+			surname = resultSet.getString("surname");
+			birthDate = resultSet.getString("birthDate");
+			age = resultSet.getInt("age");
+			type = resultSet.getString("type");
+			type = String.valueOf(User.getEnum(type));
+
+		}
+		return new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
+	}
 }

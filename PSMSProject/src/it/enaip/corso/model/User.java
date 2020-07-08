@@ -2,6 +2,9 @@ package it.enaip.corso.model;
 
 import java.sql.Timestamp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class User {
 
 	public enum Type {
@@ -149,6 +152,10 @@ public class User {
 		}
 		return type;
 
+	}
+	
+	public JSONObject getJsonObject() throws JSONException {
+		return JsonConverterUser.userToJson(this);
 	}
 
 }
