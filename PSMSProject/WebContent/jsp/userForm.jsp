@@ -36,26 +36,22 @@
 								</c:if>
 
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="name"
-										value="<c:out value='${user.name}' />" id="name" /> <label
-										class="mdl-textfield__label" for="name">Name</label>
+									<input class="mdl-textfield__input" type="text" name="name" placeholder="Name"
+										value="<c:out value='${user.name}' />" id="name" /> 
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield_input" type="text" name="surname"
-										value="<c:out value='${user.surname}' />" id="surname" /> <label
-										class="mdl-textfield__label" for="surname">Surname</label>
-								</div>
+									<input class="mdl-textfield__input" type="text" name="surname" placeholder="Surname"
+										value="<c:out value='${user.surname}' />" id="surname" />
+										
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
-										name="birthDate" value="<c:out value='${user.birthDate}' />"
-										id="birthDate" /> <label class="mdl-textfield__label"
-										for="birthDate">BirthDate</label>
+										name="birthDate"  placeholder="Date" value="<c:out value='${user.birthDate}' />"
+										id="birthDate" /> 
 								</div>
 
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="age"
-										value="<c:out value='${user.age}' />" id="age" /> <label
-										class="mdl-textfield__label" for="age">Age</label>
+									<input class="mdl-textfield__input" type="number" name="age" placeholder="Age"
+										value="<c:out value='${user.age}' />" id="age" />
 								</div>
 
 								<!-- Text input-->

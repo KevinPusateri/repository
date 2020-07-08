@@ -25,11 +25,7 @@ import it.enaip.corso.servlet.UserController;
 
 public class UserServletTest extends Mockito {
 	UserController myServlet;
-	
-    
-	
-	 
-	
+
 	@Mock
 	UserDao userdao;
 
@@ -41,8 +37,7 @@ public class UserServletTest extends Mockito {
 
 	@Mock
 	RequestDispatcher dispatcher;
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
@@ -94,5 +89,5 @@ public class UserServletTest extends Mockito {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.executeUpdate();
 	}
-	 
+
 }

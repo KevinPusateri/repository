@@ -32,21 +32,19 @@
 							</c:if>
 
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input" type="text" name="name"
-									value="<c:out value='${stuff.name}' />" id="name" /> <label
-									class="mdl-textfield__label" for="name">Name</label>
+								<input class="mdl-textfield__input" type="text" name="name" placeholder="Name"
+									value="<c:out value='${stuff.name}' />" id="name" />
 							</div>
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield_input" type="text"
-									name="description"
+								<input class="mdl-textfield__input" type="text"
+									name="description" placeholder="Description"
 									value="<c:out value='${stuff.description}' />" id="description" />
-								<label class="mdl-textfield__label" for="description">Description</label>
 							</div>
 							<div class="mdl-textfield mdl-js-textfield">
 								<c:choose>
 									<c:when test="${stuff != null }">
 										<input class="mdl-textfield__input" type="text"
-											name="quantity" value="<c:out value='${stuff.quantity}' />"
+											name="quantity" placeholder="Quantity" value="<c:out value='${stuff.quantity}' />"
 											id="quantity" />
 									</c:when>
 									<c:otherwise>
@@ -54,12 +52,10 @@
 											name="quantity" value="<c:out value='1' />" id="quantity" />
 									</c:otherwise>
 								</c:choose>
-								<label class="mdl-textfield__label" for="quantity">Quantity</label>
 							</div>
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input" type="text" name="location"
-									value="<c:out value='${stuff.location}' />" id="location" /> <label
-									class="mdl-textfield__label" for="location">Location</label>
+								<input class="mdl-textfield__input" type="text" name="location" placeholder="Location"
+									value="<c:out value='${stuff.location}' />" id="location" /> 
 							</div>
 							<input type="submit"
 								class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
