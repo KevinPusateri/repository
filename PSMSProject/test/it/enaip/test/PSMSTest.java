@@ -5,18 +5,13 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 import net.sourceforge.jwebunit.junit.*;
-
-
 
 public class PSMSTest {
 
 	static Logger log = Logger.getLogger(PSMSTest.class);
 	private WebTester tester;
 	private static final String WEBSITE_URL = "http://localhost:9090/PSMSProject";
-
 
 	@Before
 	public void prepare() {

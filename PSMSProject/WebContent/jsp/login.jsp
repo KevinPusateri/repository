@@ -18,6 +18,7 @@
 								class="mdl-card_title mdl-color--primary mdl-color-text--white">
 								<h2 class="mdl-card_title-text">
 									<c:if test="${user != null}">Login</c:if>
+									<c:if test="${user == null}">Login</c:if>
 								</h2>
 							</div>
 							<div class="mdl-card__supporting-text">

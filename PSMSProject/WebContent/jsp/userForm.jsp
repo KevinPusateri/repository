@@ -42,7 +42,7 @@
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" name="surname" placeholder="Surname"
 										value="<c:out value='${user.surname}' />" id="surname" />
-										
+									</div>	
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
 										name="birthDate"  placeholder="Date" value="<c:out value='${user.birthDate}' />"
@@ -61,6 +61,7 @@
 										<c:if test="${user != null}">
 										<option value="<c:out value='${user.type}' />"><c:out value='${user.type}' /></option>
 										</c:if>
+										<option value="CHILD">CHILD</option>
 										<option value="OWNER">OWNER</option>
 										<option value="SPOUSE">SPOUSE</option>
 									</select>
