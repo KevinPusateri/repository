@@ -54,6 +54,10 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Cambiato campo Date in birthDate
   #### 9/7/2020
   - Corretto select option di userForm per fare Edit dell'utente
+  - Aggiunto test che verifichi la presenza della tabella nel database
+  - Aggiunto test che verifichi la tabella non sia vuota
+  - Aggiunto metodo getJsonArray nel controller per avere tutti gli utenti nel json
+  - Documentazione su PrimeUI
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -70,6 +74,8 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Completato UserServletTest per testare in Junit
   #### 9/7/2020
   - Completato style Form Login.jsp
+  - Creazione tabelal Login con i seguenti campi: id, username, password, idUser
+  - Inizio gestione del login dallo UserController
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
 Eseguire il test tramite maven 3.5+ tramite riga di comando: mvn clean install.
