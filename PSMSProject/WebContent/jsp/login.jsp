@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -8,34 +7,49 @@
 <title>LoginForm</title>
 </head>
 <body>
-	<div class="mdl-card__supporting-text">
-		<c:if test="${user != null}">
-			<form name="myForm" action="/PSMSProject/UserController?op=login"
-				method="post" onsubmit="return validateForm()">
-		</c:if>
+	<div class="mdl-Layout mdl-js-layout mdl-layout--fixed-header">
+		<%@include file="menu.jsp"%>
+		<main class="mdl-layout__content">
+			<div class="page-content">
+				<div class="mdl-grid center-items">
+					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-card mdl-shadow--6dp">
+							<div
+								class="mdl-card_title mdl-color--primary mdl-color-text--white">
+								<h2 class="mdl-card_title-text">
+									<c:if test="${user != null}">Login</c:if>
+								</h2>
+							</div>
+							<div class="mdl-card__supporting-text">
+								<c:if test="${user != null}">
+									<form name="myForm"
+										action="/PSMSProject/UserController?op=login" method="post">
+								</c:if>
+								<c:if test="${user != null}">
+									<input type="hidden" name="id"
+										value="<c:out value='${user.id}' />" />
+								</c:if>
 
-
-		<c:if test="${user!= null}">
-			<input type="hidden" name="id" value="<c:out value='${user.id}' />" />
-		</c:if>
-
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield__input" type="text" name="username"
-				value="<c:out value='${user.username}' />" id="username" /> <label
-				class="mdl-textfield__label" for="username">UserName</label>
-		</div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield_input" type="text" name="password"
-				value="<c:out value='${user.password}' />" id="password" /> <label
-				class="mdl-textfield__label" for="description">Password</label>
-		</div>
-
-		<input type="submit"
-			class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+								<div class="mdl-textfield mdl-js-textfield">
+									<input class="mdl-textfield__input" type="text" name="username" placeholder="UserName"
+										value="<c:out value='${user.username}' />" id="username" /> 
+								</div>
+								<div class="mdl-textfield mdl-js-textfield">
+									<input class="mdl-textfield__input" type="text" name="password" placeholder="Password"
+										value="<c:out value='${user.password}' />" id="password" />
+                                      </div>
+		       <input type="submit"
+			  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 			value="save">
+			
 		</form>
-	</div>
-
+	
+   </div>
+   </div>
+   </div>
+   </div>
+   </div>
 	</main>
+	</div>
 </body>
 </html>
