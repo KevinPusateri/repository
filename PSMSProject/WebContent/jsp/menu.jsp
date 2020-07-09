@@ -14,21 +14,33 @@
 		</h5>
 
 		<nav class="mdl-navigation mdl-layout--large-screen-only">
-			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add  stuff</a> 
-			<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List  stuff</a>
-			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add  user</a>
-			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List  user</a>
-			<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="login">Login  user</a>
+			<a class="mdl-navigation__link"
+				href="/PSMSProject/StuffController?op=new" id="new">Add stuff</a> <a
+				class="mdl-navigation__link"
+				href="/PSMSProject/StuffController?op=list" id="list">List stuff</a>
+			<a class="mdl-navigation__link"
+				href="/PSMSProject/UserController?op=new" id="new">Add user</a> <a
+				class="mdl-navigation__link"
+				href="/PSMSProject/UserController?op=list" id="list">List user</a> <a
+				class="mdl-navigation__link"
+				href="/PSMSProject/UserController?op=login" id="login">Login</a>
+
 		</nav>
 	</div>
 </header>
 <div class="mdl-layout__drawer">
 	<span class="mdl-layout-title">PSMS</span>
 	<nav class="mdl-navigation">
-		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=new" id="new">Add  stuff</a> 
-		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List all stuff</a>
-		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add   user</a>
-		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List  user</a>
-		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="login">Login  user</a>
+		<a class="mdl-navigation__link"
+			href="/PSMSProject/StuffController?op=new" id="new">Add stuff</a> <a
+			class="mdl-navigation__link"
+			href="/PSMSProject/StuffController?op=list" id="list">List all
+			stuff</a> <a class="mdl-navigation__link"
+			href="/PSMSProject/UserController?op=new" id="new">Add user</a> <a
+			class="mdl-navigation__link"
+			href="/PSMSProject/UserController?op=list" id="list">List user</a> <a
+			class="mdl-navigation__link"
+			href="/PSMSProject/UserController?op=login" id="login">Login</a>
+
 	</nav>
 </div>
