@@ -36,33 +36,49 @@
 								</c:if>
 
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="name" placeholder="Name"
-										value="<c:out value='${user.name}' />" id="name" /> 
+									<input class="mdl-textfield__input" type="text" name="name"
+										placeholder="Name" value="<c:out value='${user.name}' />"
+										id="name" />
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="surname" placeholder="Surname"
+									<input class="mdl-textfield__input" type="text" name="surname"
+										placeholder="Surname"
 										value="<c:out value='${user.surname}' />" id="surname" />
-										
-								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="date"
-										name="birthDate"  placeholder="Date" value="<c:out value='${user.birthDate}' />"
-										id="birthDate" /> 
 								</div>
 
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="age" placeholder="Age"
-										value="<c:out value='${user.age}' />" id="age" />
+									<input class="mdl-textfield__input" type="date"
+										name="birthDate" placeholder="Date"
+										value="<c:out value='${user.birthDate}' />" id="birthDate" />
+								</div>
+
+								<div class="mdl-textfield mdl-js-textfield">
+									<input class="mdl-textfield__input" type="number" name="age"
+										placeholder="Age" value="<c:out value='${user.age}' />"
+										id="age" />
 								</div>
 
 								<!-- Text input-->
 								<div class="mdl-textfield mdl-js-textfield">
 									<label for="type">Choose a Type</label> <select name="type"
 										id="type">
-										<c:if test="${user != null}">
-										<option value="<c:out value='${user.type}' />"><c:out value='${user.type}' /></option>
+										<c:if test="${user != null && user.type.descType=='O'}">
+											<option value="<c:out value='${user.type}' />"><c:out
+													value='${user.type}' /></option>
+											<option value="CHILD">CHILD</option>
+											<option value="SPOUSE">SPOUSE</option>
 										</c:if>
-										<option value="OWNER">OWNER</option>
-										<option value="SPOUSE">SPOUSE</option>
+										<c:if test="${user != null && user.type.descType=='S'}">
+											<option value="<c:out value='${user.type}' />">
+												<c:out value='${user.type}' /></option>
+											<option value="OWNER">OWNER</option>
+											<option value="CHILD">CHILD</option>
+										</c:if>
+										<c:if test="${user == null || user.type.descType=='C'}">
+											<option value="CHILD">CHILD</option>
+											<option value="OWNER">OWNER</option>
+											<option value="SPOUSE">SPOUSE</option>
+										</c:if>
 									</select>
 								</div>
 								<input type="submit"
@@ -73,7 +89,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</main>
 	</div>
 </body>
