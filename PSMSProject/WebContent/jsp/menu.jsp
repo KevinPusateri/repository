@@ -30,6 +30,6 @@
 		<a class="mdl-navigation__link" href="/PSMSProject/StuffController?op=list" id="list">List all stuff</a>
 		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=new" id="new">Add   user</a>
 		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=list" id="list">List  user</a>
-				<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=login" id="login">Login</a>
+		<a class="mdl-navigation__link" href="/PSMSProject/UserController?op=login" id="login">Login</a>
 	</nav>
 </div>

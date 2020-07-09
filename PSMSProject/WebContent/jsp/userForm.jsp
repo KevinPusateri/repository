@@ -58,7 +58,9 @@
 								<div class="mdl-textfield mdl-js-textfield">
 									<label for="type">Choose a Type</label> <select name="type"
 										id="type">
-										<option value="CHILD">CHILD</option>
+										<c:if test="${user != null}">
+										<option value="<c:out value='${user.type}' />"><c:out value='${user.type}' /></option>
+										</c:if>
 										<option value="OWNER">OWNER</option>
 										<option value="SPOUSE">SPOUSE</option>
 									</select>
