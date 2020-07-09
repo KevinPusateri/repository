@@ -68,7 +68,6 @@
 											<option value="CHILD">CHILD</option>
 											<option value="SPOUSE">SPOUSE</option>
 										</c:if>
-<<<<<<< HEAD
 										<c:if test="${user != null && user.type.descType=='S'}">
 											<option value="<c:out value='${user.type}' />">
 												<c:out value='${user.type}' /></option>
@@ -80,11 +79,6 @@
 											<option value="OWNER">OWNER</option>
 											<option value="SPOUSE">SPOUSE</option>
 										</c:if>
-=======
-										<option value="CHILD">CHILD</option>
-										<option value="OWNER">OWNER</option>
-										<option value="SPOUSE">SPOUSE</option>
->>>>>>> branch 'NewBranch' of https://github.com/KevinPusateri/repository
 									</select>
 								</div>
 								<input type="submit"
