@@ -44,7 +44,7 @@
 									<input class="mdl-textfield__input" type="text" name="surname"
 										placeholder="Surname"
 										value="<c:out value='${user.surname}' />" id="surname" />
-								</div>
+									</div>	
 
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
@@ -68,6 +68,7 @@
 											<option value="CHILD">CHILD</option>
 											<option value="SPOUSE">SPOUSE</option>
 										</c:if>
+<<<<<<< HEAD
 										<c:if test="${user != null && user.type.descType=='S'}">
 											<option value="<c:out value='${user.type}' />">
 												<c:out value='${user.type}' /></option>
@@ -79,6 +80,11 @@
 											<option value="OWNER">OWNER</option>
 											<option value="SPOUSE">SPOUSE</option>
 										</c:if>
+=======
+										<option value="CHILD">CHILD</option>
+										<option value="OWNER">OWNER</option>
+										<option value="SPOUSE">SPOUSE</option>
+>>>>>>> branch 'NewBranch' of https://github.com/KevinPusateri/repository
 									</select>
 								</div>
 								<input type="submit"
