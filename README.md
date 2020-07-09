@@ -51,8 +51,8 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Creazione e sviluppo JsonConverteUser.java
   - Aggiunto metodo getJson() nella Servlet per ottenere oggetto json dell'utente
   - Aggiunto metodo findUser() su DaoUser per trovare utente specifico da controllare
+  - Cambiato campo Date in birthDate
   
-
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -64,8 +64,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 8/7/2020
   - Controllo su userForm l'option select per l' update utente
   - Aggiunto libreria org.skyscreamer per utilizzare il Json
-  - Creazione login.jsp
+  - Creazione file login.jsp
   - Creazione UserServletTest per testare su Junit lo UserController.java
+  - Completato UserServletTest per testare in Junit
 
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
