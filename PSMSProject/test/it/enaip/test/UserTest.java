@@ -29,7 +29,7 @@ public class UserTest {
 		assertTrue(jobj.has("age"));
 		assertTrue(jobj.has("type"));
 		assertTrue(jobj.has("sqlTimestamp"));
-
+		
 		JSONAssert.assertEquals("{id:1}", jobj, false);
 		JSONAssert.assertEquals("{name:Jason}", jobj, false);
 	}
@@ -48,6 +48,4 @@ public class UserTest {
 		boolean exists = conn.getMetaData().getTables(null, null, tableName.toUpperCase(), null).next();
 		assertTrue(exists);
 	}
-	
-
 }
