@@ -37,7 +37,7 @@
 				</div>
 				
 				<div class="inputBox">
-					<input type="date" name="date"  id="date" placeholder="Date" required>
+					<input type="date" name="birthDate"  id="birthDate" placeholder="Date" required>
 				</div>
 				
 				<div class="inputBox">

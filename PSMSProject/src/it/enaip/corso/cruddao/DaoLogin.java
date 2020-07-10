@@ -61,8 +61,27 @@ public class DaoLogin implements LoginDao {
 	}
 
 	@Override
-	public boolean save(Login o) throws SQLException {
-		return false;
+	public boolean save(Login login) throws SQLException {
+		String sql1 = "INSERT INTO login(username, password,id_user) VALUES(?,?,?)";
+		boolean rowInserted = false;
+		Connection conn = DataSourceFactory.getConnection();
+		PreparedStatement statement= conn.prepareStatement(sql1);
+		String sql2 = "SELECT id From users WHERE "
+				+ "id=(SELECT MAX(id) \r\n" + 
+				"FROM users) ";
+		PreparedStatement statement2= conn.prepareStatement(sql2);
+		int id_user = 0;
+		ResultSet resultSet = statement2.executeQuery();
+		if(resultSet.next()) {
+			id_user=resultSet.getInt("id");
+		}
+		statement.setString(1, login.getUsername());
+		statement.setString(2, login.getPassword());
+		statement.setInt(3, id_user);
+
+		rowInserted = statement.executeUpdate() > 0;
+		
+		return rowInserted;	
 	}
 
 	@Override
