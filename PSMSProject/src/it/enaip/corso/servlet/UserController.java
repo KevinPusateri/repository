@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -147,6 +149,18 @@ public class UserController extends HttpServlet {
 		DaoUser dao = new DaoUser();
 		user = dao.findUser(id);
 		JSONObject jobj = user.getJsonObject();
+
+		return jobj;
+	}
+	
+	public List<JSONObject> getJsonArray() throws SQLException, JSONException {
+		List<User> user = new ArrayList<User>();
+		DaoUser dao = new DaoUser();
+		user = dao.findAll();
+		List<JSONObject> jobj = new ArrayList<JSONObject>();
+		for (User u : user) {
+			jobj.add(u.getJsonObject());
+		}
 
 		return jobj;
 	}
