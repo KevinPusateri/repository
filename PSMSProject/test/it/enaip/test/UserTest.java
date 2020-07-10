@@ -1,6 +1,5 @@
 package it.enaip.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
@@ -12,7 +11,10 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
+import it.enaip.corso.cruddao.DaoUser;
 import it.enaip.corso.factory.DataSourceFactory;
+import it.enaip.corso.model.JsonConverterUser;
+import it.enaip.corso.model.User;
 import it.enaip.corso.servlet.UserController;
 
 public class UserTest {
@@ -47,5 +49,15 @@ public class UserTest {
 		Connection conn = DataSourceFactory.getConnection();
 		boolean exists = conn.getMetaData().getTables(null, null, tableName.toUpperCase(), null).next();
 		assertTrue(exists);
+	}
+	
+	@Test 
+	public void testDelete() throws SQLException, JSONException {
+		UserController controller = new UserController();
+		JSONObject jobj = controller.getJson("1");
+		DaoUser dao = new DaoUser();
+		User u = JsonConverterUser.jsonToUser(jobj);
+		dao.delete(u);
+		
 	}
 }

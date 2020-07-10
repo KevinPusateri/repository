@@ -32,7 +32,7 @@
 								</c:if>
 
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="username" placeholder="UserName"
+									<input class="mdl-textfield__input" type="text" name="username" placeholder="Username"
 										value="<c:out value='${user.username}' />" id="username" /> 
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
@@ -44,7 +44,8 @@
 			value="accedi">
 			
 		</form>
-	
+	<a class="mdl-navigation__link sign" 
+				href="/PSMSProject/UserController?op=signin" id="new">SIGN IN</a>
    </div>
    </div>
    </div>
