@@ -58,6 +58,11 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Aggiunto test che verifichi la tabella non sia vuota
   - Aggiunto metodo getJsonArray nel controller per avere tutti gli utenti nel json
   - Documentazione su PrimeUI
+  #### 10/7/2020
+  - Creazione file css per il login
+  - Pulsante per la registrazione dell'utente con username e password
+  - file signin.jsp per il form della registrazione dell'utente
+  - file view.css per la tabella della lista utenti 
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -74,8 +79,13 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Completato UserServletTest per testare in Junit
   #### 9/7/2020
   - Completato style Form Login.jsp
-  - Creazione tabelal Login con i seguenti campi: id, username, password, idUser
+  - Creazione tabella Login con i seguenti campi: id, username, password, id_user
   - Inizio gestione del login dallo UserController
+  #### 10/7/2020
+  - Creazione pulsante access per il login
+  - Creazione LoginDao.java
+  - Creazione classe Login
+  - Inizio metodo per l'accesso al menu.jsp da parte dell'utente
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
 Eseguire il test tramite maven 3.5+ tramite riga di comando: mvn clean install.
