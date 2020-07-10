@@ -35,7 +35,7 @@ public class User {
 	private int age;
 	private Type type;
 	private Timestamp sqlTimestamp;
-
+  
 	public User() {
 	}
 
@@ -56,7 +56,7 @@ public class User {
 		this.type = type;
 		this.sqlTimestamp = new Timestamp(System.currentTimeMillis());
 	}
-
+   
 	public int getId() {
 		return id;
 	}

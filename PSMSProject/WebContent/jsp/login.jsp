@@ -36,12 +36,12 @@
 										value="<c:out value='${user.username}' />" id="username" /> 
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="password" placeholder="Password"
+									<input class="mdl-textfield__input" type="password" name="password" placeholder="Password"
 										value="<c:out value='${user.password}' />" id="password" />
                                       </div>
 		       <input type="submit"
 			  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-			value="save">
+			value="accedi">
 			
 		</form>
 	

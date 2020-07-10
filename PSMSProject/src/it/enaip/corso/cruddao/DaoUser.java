@@ -145,4 +145,5 @@ public class DaoUser implements UserDao {
 		}
 		return new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
+	
 }
