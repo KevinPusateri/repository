@@ -81,7 +81,25 @@ public class DaoLogin implements LoginDao {
 		return false;
 	}
      
-
+    public Login findUser(String id) throws SQLException {
+    	String sql="SELCET name, surname FROM users AS t1 RIGTH JOIN login AS t2"
+    			+ " IN t1.id=t2.id"
+    			+ " WHERE t2.username=?";
+    	int user_id=0,id_user=0;
+    	String username="",password="";
+    	Connection conn= DataSourceFactory.getConnection();
+    	
+    	PreparedStatement statement=conn.prepareStatement(sql);
+    	statement.setString(1, id);
+    	ResultSet resultSet=statement.executeQuery();
+    	if(resultSet.next()) {
+    		user_id=resultSet.getInt("id");
+    		id_user=resultSet.getInt("id_user");
+    		username=resultSet.getString("username");
+    		password=resultSet.getString("password");
+    	}
+    	return  new Login(username,password,user_id,id_user);
+    }
 	
 	
 	

@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -15,6 +14,7 @@ import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import it.enaip.corso.cruddao.DaoLogin;
 import it.enaip.corso.cruddao.DaoUser;
+import it.enaip.corso.model.Login;
 import it.enaip.corso.model.User;
 import it.enaip.corso.model.User.Type;
 
@@ -35,6 +37,7 @@ public class UserController extends HttpServlet {
 	private String op;
 	private static final long serialVersionUID = 1L;
 	private DaoUser UserDao = DaoUser.getInstance();
+	private DaoLogin LoginDao=DaoLogin.getInstance();
 	private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
 	/**
@@ -171,4 +174,15 @@ public class UserController extends HttpServlet {
 		dispatcher.forward(req, resp);
 	}
 
+	
+	
+	private void listLogin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+		RequestDispatcher dispatcher =  req.getRequestDispatcher("jsp/loginList.jsp");
+		List<Login> listLogin = LoginDao.findAll();
+		 req.setAttribute("listLogin", listLogin);
+		dispatcher.forward(req, resp);
+	}
+	
+	
+	
 }
