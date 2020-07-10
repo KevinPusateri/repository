@@ -23,9 +23,6 @@ public class DaoLogin implements LoginDao {
 	}
 	
 	
-	
-	
-	
 	@Override
 	public Optional<Login> find(String id) throws SQLException {
 		String sql= "SELECT * FROM login WHERE id=?";
@@ -65,7 +62,6 @@ public class DaoLogin implements LoginDao {
 
 	@Override
 	public boolean save(Login o) throws SQLException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.enaip.corso.cruddao.DaoLogin;
 import it.enaip.corso.cruddao.DaoUser;
 import it.enaip.corso.model.Login;
 import it.enaip.corso.model.User;
@@ -37,7 +35,6 @@ public class UserController extends HttpServlet {
 	private String op;
 	private static final long serialVersionUID = 1L;
 	private DaoUser UserDao = DaoUser.getInstance();
-	private DaoLogin LoginDao=DaoLogin.getInstance();
 	private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
 	/**
@@ -56,6 +53,9 @@ public class UserController extends HttpServlet {
 		op = req.getParameter("op");
 		try {
 			switch (op) {
+			case "signInsert":
+				singInsert(req, resp);
+				break;
 			case "new":
 				showNewForm(req, resp);
 				break;
@@ -71,9 +71,11 @@ public class UserController extends HttpServlet {
 			case "update":
 				updateUser(req, resp);
 				break;
-
 			case "login":
 				showloginForm(req, resp);
+				break;
+			case "showSignin":
+				showSign(req, resp);
 				break;
 			default:
 				listUser(req, resp);
@@ -88,6 +90,29 @@ public class UserController extends HttpServlet {
 			LOGGER.log(Level.SEVERE, "Login Exception", e);
 			e.printStackTrace();
 		}
+	}
+
+	private void singInsert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ParseException, SQLException {
+		String name = req.getParameter("name");
+		String surname = req.getParameter("surname");
+		String birthDate = req.getParameter("birthDate");
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+		int age = Integer.parseInt(req.getParameter("age"));
+		String type = String.valueOf(req.getParameter("type"));
+		User user = new User(name, surname, date, age, Type.valueOf(type));
+		UserDao.save(user);
+		String username = req.getParameter("username");
+		String password = req.getParameter("password_1");
+		
+		Login login = new Login(username,password);
+//		LoginDao.save(login);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
+		dispatcher.forward(req, resp);
+	}
+
+	private void showSign(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/signin.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 	private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException, ParseException {
@@ -176,12 +201,6 @@ public class UserController extends HttpServlet {
 
 	
 	
-	private void listLogin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
-		RequestDispatcher dispatcher =  req.getRequestDispatcher("jsp/loginList.jsp");
-		List<Login> listLogin = LoginDao.findAll();
-		 req.setAttribute("listLogin", listLogin);
-		dispatcher.forward(req, resp);
-	}
 	
 	
 	

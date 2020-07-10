@@ -32,8 +32,13 @@
 								</c:if>
 
 								<div class="mdl-textfield mdl-js-textfield">
+<<<<<<< HEAD
 									<input class="mdl-textfield__input" type="text" name="username" placeholder="UserName"
 										value="<c:out value='${login.username}' />" id="username" /> 
+=======
+									<input class="mdl-textfield__input" type="text" name="username" placeholder="Username"
+										value="<c:out value='${user.username}' />" id="username" /> 
+>>>>>>> branch 'NewBranch' of https://github.com/KevinPusateri/repository.git
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="password" name="password" placeholder="Password"
@@ -44,7 +49,8 @@
 			value="accedi">
 			
 		</form>
-	
+	<a class="mdl-navigation__link sign" 
+				href="/PSMSProject/UserController?op=signin" id="new">SIGN IN</a>
    </div>
    </div>
    </div>
