@@ -1,4 +1,5 @@
 @charset "ISO-8859-1";
+
 .box-center {
 	align-items: center;
 	justify-content: center;
@@ -13,8 +14,8 @@
 	background-color: #006be5;
 }
 
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
+.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
+	{
 	/*White text for black BG, 87% black if white layout*/
 	color: white;
 }
@@ -24,12 +25,55 @@
 }
 
 #link-container {
-    text-align: center;
+	text-align: center;
 }
+
 #menu {
-    background: blue;
-    text-decoration: none;
-    color: white;
-    display: inline-block;
-    padding: 10px;
+	background: blue;
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+	padding: 10px;
+}
+
+.mio {
+	width: 600px;
+}
+
+.miopad {
+	padding: 0px;
+}
+
+.sign {
+	color: red;
+	margin-left: 100px;
+	cursor: pointer;
+	background: 0 0;
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+	border-radius: 2px;
+	position: relative;
+	height: 36px;
+	min-width: 64px;
+	padding: 0 16px;
+	display: inline-block;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0;
+	overflow: hidden;
+	will-change: box-shadow;
+	transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color
+		.2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	line-height: 36px;
+	vertical-align: middle;
+}
+
+.sign:hover {
+	background-color: rgba(158, 158, 158, .2);
 }

@@ -15,11 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.enaip.corso.cruddao.DaoStuff;
-import it.enaip.corso.cruddao.DaoUser;
-import it.enaip.corso.cruddao.UserDao;
 import it.enaip.corso.model.Stuff;
-import it.enaip.corso.model.User;
-import it.enaip.corso.model.User.Type;
 
 @WebServlet(name = "StuffController", urlPatterns = { "/StuffController" })
 public class StuffController extends HttpServlet {

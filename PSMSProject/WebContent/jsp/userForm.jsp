@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
+<! doctype html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>User Form</title>
+<link href="css/view.css" rel="stylesheet">
+<title>Form</title>
 </head>
 <body>
 	<div class="mdl-Layout mdl-js-layout mdl-layout--fixed-header">
@@ -25,13 +25,11 @@
 							<div class="mdl-card__supporting-text">
 								<c:if test="${user != null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=update" method="post"
-										onsubmit="return validateForm()">
+										action="/PSMSProject/UserController?op=update" method="post">
 								</c:if>
 								<c:if test="${user == null}">
 									<form name="myForm"
-										action="/PSMSProject/StuffController?op=insertUser"
-										method="post" onsubmit="return validateForm()">
+										action="/PSMSProject/UserController?op=insert" method="post">
 								</c:if>
 								<c:if test="${user != null}">
 									<input type="hidden" name="id"
@@ -40,66 +38,85 @@
 
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" name="name"
-										value="<c:out value='${user.name}' />" id="name" /> <label
-										class="mdl-textfield__label" for="name">Name</label>
+										placeholder="Name" value="<c:out value='${user.name}' />"
+										id="name" required/>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield_input" type="text" name="surname"
-										value="<c:out value='${user.surname}' />" id="surname" /> <label
-										class="mdl-textfield__label" for="surname">Surname</label>
-								</div>
+									<input class="mdl-textfield__input" type="text" name="surname"
+										placeholder="Surname"
+										value="<c:out value='${user.surname}' />" id="surname" required/>
+									</div>	
+
 								<div class="mdl-textfield mdl-js-textfield">
-									<c:choose>
-										<c:when test="${user != null }">
-											<label for="start">Start date:</label>
-
-											<input type="date" id="start" name="trip-start"
-												value="2020-6-7" min="2020-1-30" max="2018-12-31">
-
-										</c:when>
-										<c:otherwise>
-											<input class="mdl-textfield__input" type="text"
-												name="birthdate" value="<c:out value=''/>" id="birthdate" />
-										</c:otherwise>
-									</c:choose>
-									<label class="mdl-textfield__label" for="birthdate">BirthDate</label>
+									<input class="mdl-textfield__input" type="date"
+										name="birthDate" placeholder="Date"
+										value="<c:out value='${user.birthDate}' />" id="birthDate" onBlur="getAge(this.value)" required/>
 								</div>
+
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="number" name="age"
-										value="<c:out value='${user.age}' />" id="age" /> <label
-										class="mdl-textfield__label" for="age">Age</label>
+										placeholder="Age" value="<c:out value='${user.age}' />"
+										id="age" required/>
 								</div>
-								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="number" name="id"
-										value="<c:out value='${user.id}' />" id="id" /> <label
-										class="mdl-textfield__label" for="id">Id</label>
-								</div>
-								<!-- Text input-->
 
-								<label for="type">Choose a Type</label> <select name="type"
-									id="type" form="userForm">
-									<option value="c">CHILD</option>
-									<option value="o">Owner</option>
-									<option value="s">Spouse</option>
-								</select> <input type="submit"
-									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+								<!-- Text input-->
+								<div class="mdl-textfield mdl-js-textfield box">
+									<label for="type">Choose a Type</label> <select name="type"
+										id="type">
+										<c:if test="${user != null && user.type.descType=='O'}">
+											<option value="<c:out value='${user.type}' />"><c:out
+													value='${user.type}' /></option>
+											<option value="CHILD">CHILD</option>
+											<option value="SPOUSE">SPOUSE</option>
+										</c:if>
+										<c:if test="${user != null && user.type.descType=='S'}">
+											<option value="<c:out value='${user.type}' />">
+												<c:out value='${user.type}' /></option>
+											<option value="OWNER">OWNER</option>
+											<option value="CHILD">CHILD</option>
+										</c:if>
+										<c:if test="${user == null || user.type.descType=='C'}">
+											<option value="CHILD">CHILD</option>
+											<option value="OWNER">OWNER</option>
+											<option value="SPOUSE">SPOUSE</option>
+										</c:if>
+									</select>
+								</div>
+								<input type="submit"
+									class="mdl-button mdl-button--miocol mdl-js-button mdl-js-ripple-effect"
 									value="save">
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</main>
 	</div>
-	<script type="text/javascript">
-		function validateForm() {
-			var x = document.forms["myForm"]["quantity"].value;
-			if (x == "") {
-				alert("Quantity mustbe filled out");
-				return false;
-			}
-		}
-	</script>
 </body>
+<script type="text/javascript">
+function getAge() {
+var today = new Date();
+var date1 = document.getElementById("birthDate").value;
+var dob = new Date(date1);  
+var month = dob.getMonth();
+    var day = dob.getDate();  
+    var age = today.getFullYear() - dob.getFullYear();
+    if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day))
+    {
+      age--;
+     }                
+if(age < 0)
+{
+alert ("Invalid Date of Birth");    
+return false;
+}
+else
+{
+    document.getElementById("age").value = age;
+    doucment.getElementById("age").focus();
+    alert(age);
+    return true;
+}
+}
+</script> 
 </html>

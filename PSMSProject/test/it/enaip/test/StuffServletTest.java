@@ -1,8 +1,5 @@
 package it.enaip.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -21,13 +18,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import it.enaip.corso.cruddao.DaoStuff;
 import it.enaip.corso.cruddao.StuffDao;
 import it.enaip.corso.factory.DataSourceFactory;
-import it.enaip.corso.model.Stuff;
 import it.enaip.corso.servlet.StuffController;
 
-public class ServletTest extends Mockito {
+public class StuffServletTest extends Mockito {
 	StuffController myServlet;
 
 	@Mock
