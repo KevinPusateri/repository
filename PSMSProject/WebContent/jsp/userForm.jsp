@@ -4,6 +4,7 @@
 <! doctype html>
 <html lang="en">
 <head>
+<link href="css/view.css" rel="stylesheet">
 <title>Form</title>
 </head>
 <body>
@@ -38,28 +39,28 @@
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" name="name"
 										placeholder="Name" value="<c:out value='${user.name}' />"
-										id="name" />
+										id="name" required/>
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" name="surname"
 										placeholder="Surname"
-										value="<c:out value='${user.surname}' />" id="surname" />
+										value="<c:out value='${user.surname}' />" id="surname" required/>
 									</div>	
 
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="date"
 										name="birthDate" placeholder="Date"
-										value="<c:out value='${user.birthDate}' />" id="birthDate" />
+										value="<c:out value='${user.birthDate}' />" id="birthDate" onBlur="getAge(this.value)" required/>
 								</div>
 
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="number" name="age"
 										placeholder="Age" value="<c:out value='${user.age}' />"
-										id="age" />
+										id="age" required/>
 								</div>
 
 								<!-- Text input-->
-								<div class="mdl-textfield mdl-js-textfield">
+								<div class="mdl-textfield mdl-js-textfield box">
 									<label for="type">Choose a Type</label> <select name="type"
 										id="type">
 										<c:if test="${user != null && user.type.descType=='O'}">
@@ -82,7 +83,7 @@
 									</select>
 								</div>
 								<input type="submit"
-									class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+									class="mdl-button mdl-button--miocol mdl-js-button mdl-js-ripple-effect"
 									value="save">
 								</form>
 							</div>
@@ -92,4 +93,30 @@
 		</main>
 	</div>
 </body>
+<script type="text/javascript">
+function getAge() {
+var today = new Date();
+var date1 = document.getElementById("birthDate").value;
+var dob = new Date(date1);  
+var month = dob.getMonth();
+    var day = dob.getDate();  
+    var age = today.getFullYear() - dob.getFullYear();
+    if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day))
+    {
+      age--;
+     }                
+if(age < 0)
+{
+alert ("Invalid Date of Birth");    
+return false;
+}
+else
+{
+    document.getElementById("age").value = age;
+    doucment.getElementById("age").focus();
+    alert(age);
+    return true;
+}
+}
+</script> 
 </html>

@@ -22,6 +22,9 @@
 				href="/PSMSProject/UserController?op=new" id="new">Add user</a> <a
 				class="mdl-navigation__link"
 				href="/PSMSProject/UserController?op=list" id="list">List user</a> 
+				<a
+				class="mdl-navigation__link"
+				href="/PSMSProject/UserController?op=prova" id="list">prova</a> 
 
 		</nav>
 	</div>
