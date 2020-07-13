@@ -63,6 +63,11 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Pulsante per la registrazione dell'utente con username e password
   - file signin.jsp per il form della registrazione dell'utente
   - file view.css per la tabella della lista utenti 
+  #### 13/7/2020
+  - Style css della select option nel form
+  - Style css table listUsers
+  - Style button "Save"
+  - Documentazione javascript filtro ricerca table list utenti
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -86,6 +91,10 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Creazione LoginDao.java
   - Creazione classe Login
   - Inizio metodo per l'accesso al menu.jsp da parte dell'utente
+  #### 13/7/2020
+  - Lavorazione accesso Login
+  - Documentazione PrimeUI
+
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
 Eseguire il test tramite maven 3.5+ tramite riga di comando: mvn clean install.
