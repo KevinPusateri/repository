@@ -68,6 +68,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   - Style css table listUsers
   - Style button "Save"
   - Documentazione javascript filtro ricerca table list utenti
+  #### 14/07/2020
+  - Tutorial test PrimeUI
+  - Test JUnit dei metodi insert findAll e delete
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -94,6 +97,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 13/7/2020
   - Lavorazione accesso Login
   - Documentazione PrimeUI
+  #### 14/07/2020
+  - Sviluppo accesso dal login in corso
+  - Test JUnit casi di errori
 
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
