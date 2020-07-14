@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
-<head><title>List</title></head>
+<head>
+<link href="css/view.css" rel="stylesheet">
+<title>List</title></head>
 <body>
 	<!-- Always shows a header, even in smaller screens. -->
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -13,7 +15,7 @@
 				<div class="mdl-cell mdl-cell--4-col">
 					<div>
 						<table
-							class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+							class="mdl-data-tablemio mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 							<thead>
 								<tr>
 									<th class="mdl-data-table_cell--non-numeric">NO</th>
@@ -36,9 +38,9 @@
 										<td><c:out value="${user.birthDate}" /></td>
 										<td><c:out value="${user.age}" /></td>
 										<td><c:out value="${user.type.descType}" /></td>
-										<td><a href="/PSMSProject/UserController?op=edit&id=<c:out value='${user.id}' />">Edit</a>
+										<td><a href="/PSMSProject/UserController?op=edit&id=<c:out value='${user.id}' />"class="edit">Edit</a>
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="/PSMSProject/UserController?op=delete&id=<c:out value='${user.id}' />">Delete</a>
+											<a href="/PSMSProject/UserController?op=delete&id=<c:out value='${user.id}' />" class="elimina">Delete</a>
 										</td>
 									</tr>
 								</c:forEach>

@@ -22,7 +22,7 @@ import it.enaip.corso.cruddao.StuffDao;
 import it.enaip.corso.factory.DataSourceFactory;
 import it.enaip.corso.servlet.StuffController;
 
-public class ServletTest extends Mockito {
+public class StuffServletTest extends Mockito {
 	StuffController myServlet;
 
 	@Mock
