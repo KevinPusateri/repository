@@ -42,15 +42,5 @@
 
 	</nav>
 </div>
-<% String userName=null;
-Cookie[] cookies=request.getCookies();
-if(cookies != null){
- for(Cookie cookie:cookies){
-   if(cookie.getName().equalsIgnoreCase("username"))
-	   userName=cookie.getValue();
-   if(userName == null)
-	   response.sendRedirect("index.jsp");
- }
-}
-%>
-<h3> Benvenuto <%=userName %>,Login è andata a buon fine </h3>
+
+
