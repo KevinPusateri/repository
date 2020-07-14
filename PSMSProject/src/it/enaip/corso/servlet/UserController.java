@@ -1,6 +1,10 @@
 package it.enaip.corso.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +19,7 @@ import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +29,7 @@ import org.json.JSONObject;
 
 import it.enaip.corso.cruddao.DaoLogin;
 import it.enaip.corso.cruddao.DaoUser;
+import it.enaip.corso.factory.DataSourceFactory;
 import it.enaip.corso.model.Login;
 import it.enaip.corso.model.User;
 import it.enaip.corso.model.User.Type;
@@ -197,14 +203,37 @@ public class UserController extends HttpServlet {
 	}
 
 	private void showloginForm(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException, LoginException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/login.jsp");
-		dispatcher.forward(req, resp);
+			throws ServletException, IOException, LoginException, SQLException {
+		     String id="";
+		     String username= req.getParameter("username");
+		     String password=req.getParameter("password");
+		     id+=username+password;
+		     String sql="SELECT username,password  FROM login ";
+		     Connection conn=DataSourceFactory.getConnection();
+		     PreparedStatement statement=conn.prepareStatement(sql);
+		     statement.setString(1, username);
+		     statement.setString(2, password);
+		     ResultSet result=statement.executeQuery();
+		     if("username".equalsIgnoreCase(username) && "password".equalsIgnoreCase(password)) {
+		    	 Cookie loginCookie= new Cookie("username",username);
+		    	 //setting cookie to expiry in 30 mins
+		    	 loginCookie.setMaxAge(30*60);
+		    	 resp.addCookie(loginCookie);
+		    	 resp.sendRedirect("jsp/menu.jsp");
+		    	 LoginDao.findUser(id);
+			   		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
+			   		dispatcher.forward(req, resp);
+		    	  
+		     }
+		     else {
+		    	 RequestDispatcher dispatch=getServletContext().getRequestDispatcher("/index.jsp");
+		    	 PrintWriter out= resp.getWriter();
+		    	 out.println("<font color=red>Either user name or password is wrong.</font>");
+		    	 dispatch.include(req, resp);
+		     }
+		     
+		  
 	}
 
-	
-	
-	
-	
-	
+		
 }

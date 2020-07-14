@@ -97,9 +97,10 @@ public class DaoLogin implements LoginDao {
 	}
      
     public Login findUser(String id) throws SQLException {
-    	String sql="SELCET name, surname FROM users AS t1 RIGTH JOIN login AS t2"
-    			+ " IN t1.id=t2.id"
-    			+ " WHERE t2.username=?";
+    	String sql="SELCET name, surname FROM users  LEFT JOIN login  "
+    			+ " ON login.id=users.id"
+    			+ " WHERE login.username=?"
+    			+ "AND login.password=?";
     	int user_id=0,id_user=0;
     	String username="",password="";
     	Connection conn= DataSourceFactory.getConnection();

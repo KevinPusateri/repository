@@ -27,7 +27,7 @@
 				<span><i class="fa fa-lock" aria-hidden="true"></i></span>
 				<input type="password" name="password" placeholder="Password" autocomplete="off" required>
 			</div>
-				<input type="submit" name="submit" value="Login">
+			<input type="submit" name="submit" value="Login">
 		</form> 
 		<form action="/PSMSProject/UserController?op=showSignin" method="post" style="margin-top: -40px;">
 		<input type="submit" style="background-color: rgb(233, 76, 39);" name="submit" value="Sign in">
