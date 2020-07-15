@@ -83,7 +83,7 @@ public class UserController extends HttpServlet {
 			case "showSignin":
 				showSign(req, resp);
 				break;
-			default:
+			case "list":
 				listUser(req, resp);
 				break;
 			}
@@ -188,6 +188,14 @@ public class UserController extends HttpServlet {
 		return jobj;
 	}
 	
+	public JSONObject getJson() throws SQLException, JSONException {
+		User user = new User();
+		DaoUser dao = new DaoUser();
+		user = dao.findUserLast();
+		JSONObject jobj = user.getJsonObject();
+
+		return jobj;
+	}
 	public List<JSONObject> getJsonArray() throws SQLException, JSONException {
 		List<User> user = new ArrayList<User>();
 		DaoUser dao = new DaoUser();

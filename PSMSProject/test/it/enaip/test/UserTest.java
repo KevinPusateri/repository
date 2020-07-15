@@ -1,6 +1,5 @@
 package it.enaip.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -8,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,28 +26,29 @@ import it.enaip.corso.servlet.UserController;
 
 public class UserTest {
 
-private User user;
-private Date data;
+	private User user;
+	private Date data;
+
 	@SuppressWarnings("deprecation")
 	@Before
 	public void setup() {
-		
 		int year = 1999;
-		int dd = 04;
 		int mm = 02;
-		int anno=1990;
-		int gg=00;
-		int ms=01;
-		Date date = new Date(year,mm,dd);
-		data      = new Date(anno,ms,gg); 
-		user = new User("dfsfds","Apra",date,23,Type.CHILD);
+		int dd = 04;
+
+		int anno = 1990;
+		int gg = 00;
+		int ms = 01;
+		Date date = new Date(year, mm, dd);
+		data = new Date(anno, ms, gg);
+		user = new User("dfsfds", "Apra", date, 23, Type.CHILD);
 //		user.setName("dfsfds");
 //		user.setSurname("Apra");
 //		user.setBirthDate(date);
 //		user.setAge(23);
-//		user.setType(Type.CHILD);
+//		user.setType(Type.CHILD)
 	}
-	
+
 	@Test
 	public void testRecordIsPresent() throws JSONException, SQLException {
 		UserController controller = new UserController();
@@ -61,7 +61,7 @@ private Date data;
 		assertTrue(jobj.has("age"));
 		assertTrue(jobj.has("type"));
 		assertTrue(jobj.has("sqlTimestamp"));
-		
+
 		JSONAssert.assertEquals("{id:1}", jobj, false);
 		JSONAssert.assertEquals("{name:Jason}", jobj, false);
 	}
@@ -70,9 +70,9 @@ private Date data;
 	public void testTableIsNotEmpty() throws SQLException, JSONException {
 		UserController controller = new UserController();
 		List<JSONObject> jobj = controller.getJsonArray();
-		assertTrue(jobj.size()>0);
+		assertTrue(jobj.size() > 0);
 	}
-	
+
 	@Test
 	public void testTableExists() throws SQLException {
 		String tableName = "users";
@@ -80,44 +80,60 @@ private Date data;
 		boolean exists = conn.getMetaData().getTables(null, null, tableName.toUpperCase(), null).next();
 		assertTrue(exists);
 	}
-	
-	@Test 
-	public void testDelete() throws SQLException, JSONException {
+
+	@Test
+	public void testDelete() throws SQLException, JSONException, ParseException {
 		UserController controller = new UserController();
-		JSONObject jobj = controller.getJson("2");
 		DaoUser dao = new DaoUser();
+		user = new User("dfsfds", "Apra", new SimpleDateFormat("yyyy-MM-dd").parse("1999-12-23"), 23, Type.CHILD);
+		dao.save(user);
+		JSONObject jobj = controller.getJson();
 		User u = JsonConverterUser.jsonToUser(jobj);
 		boolean row = dao.delete(u);
 		assertTrue(row);
 	}
-	
+
 	@Test
-	public void testInsert() throws SQLException {
+	public void testInsertCorrect() throws SQLException {
 		DaoUser dao = new DaoUser();
-		assertNotNull(user);
-		assertTrue("Errore, nome vuoto", user.getName().length()>0);
-		user.setName("Kevin");
-		assertTrue("Contiene numero nel nome", !user.getName().matches(".*\\d.*"));
-		
-		assertTrue("Errore, cognome vuoto", user.getSurname().length()>0);
-		user.setSurname("Pusa");
-		assertTrue("Contiene numero nel cognome", !user.getSurname().matches(".*\\d.*"));
-		
+		assertTrue("Errore, insert non eseguito", dao.save(user));
+	}
+
+	@Test
+	public void testInsertError() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setName(null);
+		dao.save(user);
+		User u = dao.findUserLast();
+		assertTrue("Nome is null", u.getName() == null);
+
+//		assertTrue("Errore, nome vuoto", user.getName().length()>0);
+//		user.setName("das");
+//		assertTrue("Errore, contiene numero nel nome", !user.getName().matches(".*\\d.*"));
+//		
+//		user.setName(null);
+//		assertNotNull("Nome è null",user.getName());
+//
+//		assertTrue("Errore, cognome vuoto", user.getSurname().length()>0);
+//		user.setSurname("Pusa");
+//		assertTrue("Errore, contiene numero nel cognome", !user.getSurname().matches(".*\\d.*"));
+//		user.setSurname(null);
+//		assertNotNull("Nome è null",user.getSurname());
+//
+//		user.setAge(23);
+//		assertTrue("Errore, eta negativo", user.getAge()>0);
+
 		user.setAge(23);
-		assertTrue("Errore, eta negativo", user.getAge()>0);
-		user.setBirthDate(data);
-		assertEquals("Errore, nel formato della data", user.getBirthDate());
-		
+		assertTrue("Errore, eta negativo", user.getAge() > 0);
+
 //		assertTrue("Errore, insert non eseguito", dao.save(user));
 	}
-	
+
 	@Test
 	public void testFindAll() throws SQLException {
 		DaoUser dao = new DaoUser();
 		List<User> listUser = dao.findAll();
 		assertTrue("record is empty", !listUser.isEmpty());
 	}
-		
-
 
 }
