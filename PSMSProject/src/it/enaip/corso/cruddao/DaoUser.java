@@ -147,4 +147,31 @@ public class DaoUser implements UserDao {
 		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
 	
+	public User findUserLast() throws SQLException {
+		String sql = "SELECT * " + 
+				"FROM users " + 
+				"WHERE id=( " + 
+				"    SELECT Max(id) FROM users " + 
+				"    )";
+		int id_user = 0, age = 0;
+		String name = "", surname = "", type = "";
+		Date birthDate = null;
+		Connection conn = DataSourceFactory.getConnection();
+
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+
+		if (resultSet.next()) {
+			id_user = resultSet.getInt("id");
+			name = resultSet.getString("name");
+			surname = resultSet.getString("surname");
+			birthDate = resultSet.getDate("birthDate");
+			age = resultSet.getInt("age");
+			type = resultSet.getString("type");
+			type = String.valueOf(User.getEnum(type));
+
+		}
+		
+		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
+	}
 }
