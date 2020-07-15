@@ -2,6 +2,14 @@
 
 Abbiamo deciso di utilizzare il progetto PSMS web convertito in maven.
 
+Il progetto prevede che ci sia un login per l'accesso da parte dell'utente registrato.
+La possibilità di registrarsi nel sito.
+All'accesso di avere nel menu la visualizzazione degli utenti registrati e un form per l'inserimento di un utente.
+Eseguire dei Test del Database, DaoUser e ServletUser con JUnit.
+Creare due tabelle:
+ - Users: id, name, surname, birthDate, age, type, timestamp
+ - Login: id, username, password, id_user
+
 #### Prerequisiti
 Architettura |
 ------------ |
