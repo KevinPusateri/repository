@@ -33,10 +33,10 @@ private User user;
 		Date date = new Date(year,dd,mm);
 		
 		user = new User();
-		user.setName("Kevin");
+		user.setName("dfsfds");
 		user.setSurname("Apra");
 		user.setBirthDate(date);
-		user.setAge(24);
+		user.setAge(-2);
 		user.setType(Type.CHILD);
 	}
 	
@@ -85,7 +85,12 @@ private User user;
 	@Test
 	public void testInsert() throws SQLException {
 		DaoUser dao = new DaoUser();
-		 assertTrue("Error, insert not executed", dao.save(user));
+		user.setName(" ");
+		assertTrue("nome vuoto ", user.getName().length()>0);
+		user.setName("2341");
+		assertTrue("nome contiene numeri", !user.getName().contains(""));
+
+		assertTrue("Error, insert not executed", dao.save(user));
 	}
 	
 	@Test
@@ -94,5 +99,7 @@ private User user;
 		List<User> listUser = dao.findAll();
 		assertTrue("record is empty", !listUser.isEmpty());
 	}
-	
+		
+
+
 }
