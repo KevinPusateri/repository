@@ -70,6 +70,10 @@ public class User {
 	}
 
 	public void setName(String name) {
+		if(name == null || name.equals("")) {
+			throw new NullPointerException();
+		}
+		
 		this.name = name;
 	}
 
@@ -78,6 +82,10 @@ public class User {
 	}
 
 	public void setSurname(String surname) {
+		
+		if(surname == null || surname.equals("")) {
+			throw new NullPointerException();
+		}
 		this.surname = surname;
 	}
 
@@ -94,6 +102,9 @@ public class User {
 	}
 
 	public void setAge(int age) {
+		if(age < 0) {
+			throw new NumberFormatException();
+		}
 		this.age = age;
 	}
 

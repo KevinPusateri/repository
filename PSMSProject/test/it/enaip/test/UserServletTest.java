@@ -93,7 +93,7 @@ public class UserServletTest extends Mockito {
 	@Test(expected = NullPointerException.class)
 	public void testinsertUser() throws IOException, ServletException, SQLException {
 	  myServlet =new UserController();
-	  when(request.getParameter("op")).thenReturn("");
+	  when(request.getParameter("op")).thenReturn("insert");
 		when(request.getParameter("name")).thenReturn("");
 		when(request.getParameter("surname")).thenReturn("");
 		when(request.getParameter("birthDate")).thenReturn("1995-07");
