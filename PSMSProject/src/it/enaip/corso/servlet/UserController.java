@@ -1,6 +1,9 @@
 package it.enaip.corso.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +14,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.security.auth.login.LoginException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +27,7 @@ import org.json.JSONObject;
 
 import it.enaip.corso.cruddao.DaoLogin;
 import it.enaip.corso.cruddao.DaoUser;
+import it.enaip.corso.factory.DataSourceFactory;
 import it.enaip.corso.model.Login;
 import it.enaip.corso.model.User;
 import it.enaip.corso.model.User.Type;
