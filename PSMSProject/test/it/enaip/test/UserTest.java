@@ -1,11 +1,16 @@
 package it.enaip.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,15 +34,15 @@ private User user;
 		
 		int year = 1999;
 		int dd = 04;
-		int mm = 05;
+		int mm = 02;
 		Date date = new Date(year,dd,mm);
 		
-		user = new User();
-		user.setName("dfsfds");
-		user.setSurname("Apra");
-		user.setBirthDate(date);
-		user.setAge(-2);
-		user.setType(Type.CHILD);
+		user = new User("dfsfds","Apra",date,23,Type.CHILD);
+//		user.setName("dfsfds");
+//		user.setSurname("Apra");
+//		user.setBirthDate(date);
+//		user.setAge(23);
+//		user.setType(Type.CHILD);
 	}
 	
 	@Test
@@ -85,12 +90,18 @@ private User user;
 	@Test
 	public void testInsert() throws SQLException {
 		DaoUser dao = new DaoUser();
-		user.setName(" ");
-		assertTrue("nome vuoto ", user.getName().length()>0);
-		user.setName("2341");
-		assertTrue("nome contiene numeri", !user.getName().contains(""));
-
-		assertTrue("Error, insert not executed", dao.save(user));
+		assertNotNull(user);
+		assertTrue("Errore, nome vuoto", user.getName().length()>0);
+		user.setName("Kevin");
+		assertTrue("Contiene numero nel nome", !user.getName().matches(".*\\d.*"));
+		
+		assertTrue("Errore, cognome vuoto", user.getSurname().length()>0);
+		user.setSurname("Pusa");
+		assertTrue("Contiene numero nel cognome", !user.getSurname().matches(".*\\d.*"));
+		
+		user.setAge(23);
+		assertTrue("Errore, eta negativo", user.getAge()>0);
+//		assertTrue("Errore, insert non eseguito", dao.save(user));
 	}
 	
 	@Test
