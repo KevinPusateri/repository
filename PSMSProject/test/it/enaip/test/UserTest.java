@@ -28,15 +28,19 @@ import it.enaip.corso.servlet.UserController;
 public class UserTest {
 
 private User user;
-
+private Date data;
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setup() {
 		
 		int year = 1999;
 		int dd = 04;
 		int mm = 02;
-		Date date = new Date(year,dd,mm);
-		
+		int anno=1990;
+		int gg=00;
+		int ms=01;
+		Date date = new Date(year,mm,dd);
+		data      = new Date(anno,ms,gg); 
 		user = new User("dfsfds","Apra",date,23,Type.CHILD);
 //		user.setName("dfsfds");
 //		user.setSurname("Apra");
@@ -101,6 +105,9 @@ private User user;
 		
 		user.setAge(23);
 		assertTrue("Errore, eta negativo", user.getAge()>0);
+		user.setBirthDate(data);
+		assertEquals("Errore, nel formato della data", user.getBirthDate());
+		
 //		assertTrue("Errore, insert non eseguito", dao.save(user));
 	}
 	
