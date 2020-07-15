@@ -94,6 +94,7 @@ private User user;
 		dao.save(user);
 		User u = dao.findUserLast();
 		assertTrue("Nome is null", u.getName()==null);
+		
 //		assertTrue("Errore, nome vuoto", user.getName().length()>0);
 //		user.setName("das");
 //		assertTrue("Errore, contiene numero nel nome", !user.getName().matches(".*\\d.*"));
