@@ -71,6 +71,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 14/07/2020
   - Tutorial test PrimeUI
   - Test JUnit dei metodi insert findAll e delete
+  #### 15/07/2020
+  - Completato accesso login dell'utente e caso di errore
+  - Test Junit casi di errori in input nella tabella user
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -100,6 +103,10 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 14/07/2020
   - Sviluppo accesso dal login in corso
   - Test JUnit casi di errori
+  #### 15/07/2020
+  - Gestione delle eccezioni nei valori della classe user
+  - Test Junit casi di errori in input nella tabella user
+
 
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.
