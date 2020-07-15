@@ -61,6 +61,9 @@ public class UserController extends HttpServlet {
 		op = req.getParameter("op");
 		try {
 			switch (op) {
+			case "access":
+				accessToMenu(req, resp);
+				break;
 			case "signInsert":
 				singInsert(req, resp);
 				break;
@@ -79,9 +82,6 @@ public class UserController extends HttpServlet {
 			case "update":
 				updateUser(req, resp);
 				break;
-			case "menu":
-				menu(req, resp);
-				break;
 			case "showSignin":
 				showSign(req, resp);
 				break;
@@ -94,11 +94,10 @@ public class UserController extends HttpServlet {
 		} catch (ParseException e) {
 			LOGGER.log(Level.SEVERE, "Parse Error", e);
 			e.printStackTrace();
-		} 
-//		catch (LoginException e) {
-//			LOGGER.log(Level.SEVERE, "Login Exception", e);
-//			e.printStackTrace();
-//		}
+		}catch (LoginException e) {
+			LOGGER.log(Level.SEVERE, "Login Exception", e);
+			e.printStackTrace();
+		}
 	}
 
 
@@ -182,11 +181,6 @@ public class UserController extends HttpServlet {
 		dispatcher.forward(req, resp);
 	}
 	
-	private void menu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
-		dispatcher.forward(req, resp);
-	}
-
 	public JSONObject getJson(String id) throws SQLException, JSONException {
 		User user = new User();
 		DaoUser dao = new DaoUser();
@@ -208,41 +202,28 @@ public class UserController extends HttpServlet {
 		return jobj;
 	}
 
-//	private void showloginForm(HttpServletRequest req, HttpServletResponse resp)
-//			throws ServletException, IOException, LoginException, SQLException {
-//		   
-//		     
-//		     String sql="SELECT  id,username,password  FROM login WHERE id=1 ";
-//		     String username= req.getParameter("username");
-//		     String password=req.getParameter("password");
-//		     Connection conn=DataSourceFactory.getConnection();
-//		     PreparedStatement statement=conn.prepareStatement(sql);
-//		     ResultSet result=statement.executeQuery();
-//		     boolean find=false;
-//		     while(result.next()) {
-//		    	 if(username.equalsIgnoreCase(result.getString("username")) && password.equalsIgnoreCase(result.getString("password"))) {
-//		    	 Cookie loginCookie= new Cookie("username",username);
-//		    	 //setting cookie to expiry in 30 mins
-//		    	 loginCookie.setMaxAge(30*60);
-//		    	 resp.addCookie(loginCookie);
-//		    	 find = true;
-//		    	 RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
-//			    	Login login = LoginDao.findUser(String.valueOf(result.getInt("id")));
-//			 		req.setAttribute("login", login);
-//			 		dispatcher.forward(req, resp);
-//		    	 }
-//			}
-//		     if(!find) {
-//		    	 RequestDispatcher dispatch=getServletContext().getRequestDispatcher("/index.jsp");
-//		    	 PrintWriter out= resp.getWriter();
-//		    	 out.println("<font color=red>Either user name or password is wrong.</font>");
-//		    	 dispatch.include(req, resp);
-//		     }else {
-//		    	
-//		     }
-//		     
-//		  
-//	}
-
-		
+	private void accessToMenu(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, LoginException, SQLException {
+		     String sql="SELECT id,username,password  FROM login";
+		     String username= req.getParameter("username");
+		     String password=req.getParameter("password");
+		     Connection conn=DataSourceFactory.getConnection();
+		     PreparedStatement statement=conn.prepareStatement(sql);
+		     ResultSet result=statement.executeQuery();
+		     boolean find=false;
+		     while(result.next()) {
+		    	 if(username.equalsIgnoreCase(result.getString("username")) && password.equalsIgnoreCase(result.getString("password"))) {
+		    		find = true;
+			    	String name = LoginDao.findUser(result.getInt("id"),username,password);
+			 		req.setAttribute("message", name);
+			 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
+			 		dispatcher.forward(req, resp);
+		    	 }
+			}
+		     if(!find) {
+		    	 req.setAttribute("error", "<font color=red>Either user name or password is wrong.</font>");
+			 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+			 		dispatcher.forward(req, resp);
+		     }
+	}
 }

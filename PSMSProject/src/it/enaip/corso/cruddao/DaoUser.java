@@ -143,7 +143,8 @@ public class DaoUser implements UserDao {
 			type = String.valueOf(User.getEnum(type));
 
 		}
-		return new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
+		
+		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
 	
 }

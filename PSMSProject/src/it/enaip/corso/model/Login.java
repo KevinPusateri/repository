@@ -22,7 +22,7 @@ public class Login {
 	}
 
 
-	public Login(String username, String password, int user_id) {
+	public Login(String username, String password,int user_id) {
 		this(user_id);
 		this.username=username;
 		this.password=password;

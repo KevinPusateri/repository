@@ -16,8 +16,8 @@
 		<img  class="user" src="images/user.jpg">
 		
 		<h3>Accedi qui</h3>
-		<form action="/PSMSProject/UserController?op=menu" method="post">
-		
+		<form action="/PSMSProject/UserController?op=access" method="post">
+		${error}
 			<div class="inputBox">
 				<span><i class="fa fa-user" aria-hidden="true"></i></span>
 				<input type="text" name="username" placeholder="Username" autocomplete="off" required>

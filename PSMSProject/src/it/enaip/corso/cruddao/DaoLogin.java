@@ -78,7 +78,6 @@ public class DaoLogin implements LoginDao {
 		statement.setString(1, login.getUsername());
 		statement.setString(2, login.getPassword());
 		statement.setInt(3, id_user);
-
 		rowInserted = statement.executeUpdate() > 0;
 		
 		return rowInserted;	
@@ -96,25 +95,24 @@ public class DaoLogin implements LoginDao {
 		return false;
 	}
      
-    public Login findUser(String id) throws SQLException {
-    	String sql="SELCET name, surname FROM users  LEFT JOIN login  "
-    			+ " ON login.id=users.id"
-    			+ " WHERE login.username=?"
-    			+ "AND login.password=?";
-    	int user_id=0,id_user=0;
-    	String username="",password="";
+    public String findUser(int id,String username,String password) throws SQLException {
+    	String sql="SELECT name FROM users LEFT JOIN login "+ 
+    			"ON users.id=login.id_user "+
+    			"WHERE login.username=? "+
+    			"AND login.password=? "
+    			+ "AND login.id=?";
+    	String name="",surname="";
     	Connection conn= DataSourceFactory.getConnection();
     	
     	PreparedStatement statement=conn.prepareStatement(sql);
-    	statement.setString(1, id);
+    	statement.setString(1, username);
+    	statement.setString(2, password);
+    	statement.setInt(3, id);
     	ResultSet resultSet=statement.executeQuery();
     	if(resultSet.next()) {
-    		user_id=resultSet.getInt("id");
-    		id_user=resultSet.getInt("id_user");
-    		username=resultSet.getString("username");
-    		password=resultSet.getString("password");
+    		name=resultSet.getString("name");
     	}
-    	return  new Login(username,password,user_id,id_user);
+    	return name;
     }
 	
 	

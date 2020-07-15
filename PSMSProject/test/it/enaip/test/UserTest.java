@@ -3,11 +3,13 @@ package it.enaip.test;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
@@ -15,10 +17,29 @@ import it.enaip.corso.cruddao.DaoUser;
 import it.enaip.corso.factory.DataSourceFactory;
 import it.enaip.corso.model.JsonConverterUser;
 import it.enaip.corso.model.User;
+import it.enaip.corso.model.User.Type;
 import it.enaip.corso.servlet.UserController;
 
 public class UserTest {
 
+private User user;
+
+	@Before
+	public void setup() {
+		
+		int year = 1999;
+		int dd = 04;
+		int mm = 05;
+		Date date = new Date(year,dd,mm);
+		
+		user = new User();
+		user.setName("Kevin");
+		user.setSurname("Apra");
+		user.setBirthDate(date);
+		user.setAge(24);
+		user.setType(Type.CHILD);
+	}
+	
 	@Test
 	public void testRecordIsPresent() throws JSONException, SQLException {
 		UserController controller = new UserController();
@@ -54,10 +75,24 @@ public class UserTest {
 	@Test 
 	public void testDelete() throws SQLException, JSONException {
 		UserController controller = new UserController();
-		JSONObject jobj = controller.getJson("1");
+		JSONObject jobj = controller.getJson("2");
 		DaoUser dao = new DaoUser();
 		User u = JsonConverterUser.jsonToUser(jobj);
-		dao.delete(u);
-		
+		boolean row = dao.delete(u);
+		assertTrue(row);
 	}
+	
+	@Test
+	public void testInsert() throws SQLException {
+		DaoUser dao = new DaoUser();
+		 assertTrue("Error, insert not executed", dao.save(user));
+	}
+	
+	@Test
+	public void testFindAll() throws SQLException {
+		DaoUser dao = new DaoUser();
+		List<User> listUser = dao.findAll();
+		assertTrue("record is empty", !listUser.isEmpty());
+	}
+	
 }
