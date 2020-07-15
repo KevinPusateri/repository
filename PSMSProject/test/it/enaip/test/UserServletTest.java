@@ -89,5 +89,29 @@ public class UserServletTest extends Mockito {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.executeUpdate();
 	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testinsertUser() throws IOException, ServletException, SQLException {
+	  myServlet =new UserController();
+	  when(request.getParameter("op")).thenReturn("");
+		when(request.getParameter("name")).thenReturn("");
+		when(request.getParameter("surname")).thenReturn("");
+		when(request.getParameter("birthDate")).thenReturn("1995-07");
+		when(request.getParameter("age")).thenReturn("25");
+		when(request.getParameter("type")).thenReturn(Type.SPOUSE.toString());
+ 
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		when(response.getWriter()).thenReturn(printWriter);
+		when(request.getRequestDispatcher("jsp/userList.jsp")).thenReturn(dispatcher);
+		myServlet.doPost(request, response);
+		verify(dispatcher).forward(request, response);
 
+		String sql = "DELETE FROM users WHERE  id = (SELECT Max(id) FROM users)";
+		Connection conn = DataSourceFactory.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.executeUpdate();
+		
+	}	
+	
 }
