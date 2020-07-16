@@ -2,6 +2,14 @@
 
 Abbiamo deciso di utilizzare il progetto PSMS web convertito in maven.
 
+Il progetto prevede che ci sia un login per l'accesso da parte dell'utente registrato.
+La possibilità di registrarsi nel sito.
+All'accesso di avere nel menu la visualizzazione degli utenti registrati e un form per l'inserimento di un utente.
+Eseguire dei Test del Database, DaoUser e ServletUser con JUnit.
+Creare due tabelle:
+ - Users: id, name, surname, birthDate, age, type, timestamp
+ - Login: id, username, password, id_user
+
 #### Prerequisiti
 Architettura |
 ------------ |
@@ -71,6 +79,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 14/07/2020
   - Tutorial test PrimeUI
   - Test JUnit dei metodi insert findAll e delete
+  #### 15/07/2020
+  - Completato accesso login dell'utente e caso di errore
+  - Test Junit casi di errori in input nella tabella user
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -100,6 +111,10 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 14/07/2020
   - Sviluppo accesso dal login in corso
   - Test JUnit casi di errori
+  #### 15/07/2020
+  - Gestione delle eccezioni nei valori della classe user
+  - Test Junit casi di errori in input nella tabella user
+
 
 #### Running the tests
 Testare il progetto Web tramite Jwebunit, la servlet e le applicazioni CRUD con l'utilizzo degli assert.

@@ -28,7 +28,7 @@ import it.enaip.corso.servlet.UserController;
 
 public class UserTest {
 
-private User user;
+	private User user;
 
 	@Before
 	public void setup() throws ParseException{
@@ -38,7 +38,7 @@ private User user;
 		c.setTime(sdf.parse(dt));
 		user = new User("Prova","Coc",c.getTime(),23,Type.CHILD);
 	}
-	
+
 	@Test
 	public void testRecordIsPresent() throws JSONException, SQLException {
 		UserController controller = new UserController();
@@ -51,7 +51,7 @@ private User user;
 		assertTrue(jobj.has("age"));
 		assertTrue(jobj.has("type"));
 		assertTrue(jobj.has("sqlTimestamp"));
-		
+
 		JSONAssert.assertEquals("{id:1}", jobj, false);
 		JSONAssert.assertEquals("{name:Jason}", jobj, false);
 	}
@@ -60,9 +60,9 @@ private User user;
 	public void testTableIsNotEmpty() throws SQLException, JSONException {
 		UserController controller = new UserController();
 		List<JSONObject> jobj = controller.getJsonArray();
-		assertTrue(jobj.size()>0);
+		assertTrue(jobj.size() > 0);
 	}
-	
+
 	@Test
 	public void testTableExists() throws SQLException {
 		String tableName = "users";
@@ -70,19 +70,19 @@ private User user;
 		boolean exists = conn.getMetaData().getTables(null, null, tableName.toUpperCase(), null).next();
 		assertTrue(exists);
 	}
-	
-	@Test 
+
+	@Test
 	public void testDelete() throws SQLException, JSONException, ParseException {
 		UserController controller = new UserController();
 		DaoUser dao = new DaoUser();
-		user = new User("dfsfds","Apra",new SimpleDateFormat("yyyy-MM-dd").parse("1999-12-23"),23,Type.CHILD);
+		user = new User("dfsfds", "Apra", new SimpleDateFormat("yyyy-MM-dd").parse("1999-12-23"), 23, Type.CHILD);
 		dao.save(user);
 		JSONObject jobj = controller.getJson();
 		User u = JsonConverterUser.jsonToUser(jobj);
 		boolean row = dao.delete(u);
 		assertTrue(row);
 	}
-	
+
 	@Test
 	public void testFindAll() throws SQLException {
 		DaoUser dao = new DaoUser();
