@@ -31,6 +31,7 @@ public class DaoUser implements UserDao {
 		Date birthDate = null;
 		Connection conn = DataSourceFactory.getConnection();
 
+		try {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
@@ -44,34 +45,42 @@ public class DaoUser implements UserDao {
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
 		}
-		
-		conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
 
 		return Optional.of(new User(id_user, name, surname, birthDate, age, Type.valueOf(type)));
 	}
 
 	@Override
-	public List<User> findAll() throws SQLException {
+	public List<User> findAll() throws SQLException{
+		
 		List<User> listUser = new ArrayList<User>();
 		String sql = "SELECT id,name,surname,birthDate,age,type FROM users";
-
 		Connection conn = DataSourceFactory.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		ResultSet resultSet = statement.executeQuery(sql);
+		try{
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery(sql);
 
-		while (resultSet.next()) {
-			int id = resultSet.getInt("id");
-			String name = resultSet.getString("name");
-			String surname = resultSet.getString("surname");
-			java.sql.Date birthDate = resultSet.getDate("birthDate");
-			int age = resultSet.getInt("age");
-			String type = resultSet.getString("type");
-			type = String.valueOf(User.getEnum(type));
-			User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				String surname = resultSet.getString("surname");
+				java.sql.Date birthDate = resultSet.getDate("birthDate");
+				int age = resultSet.getInt("age");
+				String type = resultSet.getString("type");
+				type = String.valueOf(User.getEnum(type));
+				User user = new User(id, name, surname, birthDate, age, Type.valueOf(type));
 
-			listUser.add(user);
+				listUser.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
 		}
-		conn.close();
 
 		return listUser;
 	}
@@ -82,15 +91,20 @@ public class DaoUser implements UserDao {
 		String sql = "INSERT INTO users (name, surname, birthDate, age, type, time) VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DataSourceFactory.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, user.getName());
-		statement.setString(2, user.getSurname());
-		statement.setDate(3, new java.sql.Date(user.getBirthDate().getTime()));
-		statement.setInt(4, user.getAge());
-		statement.setString(5, user.getValueType());
-		statement.setTimestamp(6, user.getSqlTimestamp());
-		rowInserted = statement.executeUpdate() > 0;
-		conn.close();
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, user.getName());
+			statement.setString(2, user.getSurname());
+			statement.setDate(3, new java.sql.Date(user.getBirthDate().getTime()));
+			statement.setInt(4, user.getAge());
+			statement.setString(5, user.getValueType());
+			statement.setTimestamp(6, user.getSqlTimestamp());
+			rowInserted = statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			conn.close();
+		}
 
 		return rowInserted;
 	}
@@ -102,6 +116,7 @@ public class DaoUser implements UserDao {
 
 		boolean rowUpdated = false;
 		Connection conn = DataSourceFactory.getConnection();
+		try {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, user.getName());
 		statement.setString(2, user.getSurname());
@@ -111,7 +126,11 @@ public class DaoUser implements UserDao {
 		statement.setTimestamp(6, user.getSqlTimestamp());
 		statement.setInt(7, user.getId());
 		rowUpdated = statement.executeUpdate() > 0;
-		conn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
 
 		return rowUpdated;
 	}
@@ -121,10 +140,16 @@ public class DaoUser implements UserDao {
 		String sql = "DELETE FROM users WHERE id = ?";
 		boolean rowDeleted = false;
 		Connection conn = DataSourceFactory.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, user.getId());
-		rowDeleted = statement.executeUpdate() > 0;
-		conn.close();
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, user.getId());
+			rowDeleted = statement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
 
 		return rowDeleted;
 	}
@@ -137,6 +162,7 @@ public class DaoUser implements UserDao {
 		Date birthDate = null;
 		Connection conn = DataSourceFactory.getConnection();
 
+		try {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
@@ -149,9 +175,13 @@ public class DaoUser implements UserDao {
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
-
 		}
-		conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+		
 		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
 	
@@ -166,6 +196,7 @@ public class DaoUser implements UserDao {
 		Date birthDate = null;
 		Connection conn = DataSourceFactory.getConnection();
 
+		try {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 
@@ -178,7 +209,11 @@ public class DaoUser implements UserDao {
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
 		}
-		conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
 
 		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}

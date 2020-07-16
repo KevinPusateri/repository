@@ -24,7 +24,7 @@ public class DatabaseTest {
 	public void after() {
 		DataSourceFactory.closeConnection(connection);
 	}
-
+	
 	@Test
 	public void closeStatementShouldCloseStatement() throws SQLException {
 		Statement statement = connection.createStatement();
