@@ -18,7 +18,7 @@ public class DaoLogin implements LoginDao {
 		private static final DaoLogin INSTANCE = new DaoLogin();
 	}
 
-	public static DaoLogin   getInstance() {
+	public static DaoLogin getInstance() {
 		return SingletonHelper.INSTANCE;
 	}
 	
@@ -30,14 +30,20 @@ public class DaoLogin implements LoginDao {
 		String username="", password="";
 		Connection conn= DataSourceFactory.getConnection();
 
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(1, id);
-		ResultSet resultSet = statement.executeQuery();
-		if(resultSet.next()) {
-			id_user=resultSet.getInt("id_user");
-			user_id=resultSet.getInt("id");
-			username=resultSet.getString("username");
-			password=resultSet.getString("password");
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				id_user=resultSet.getInt("id_user");
+				user_id=resultSet.getInt("id");
+				username=resultSet.getString("username");
+				password=resultSet.getString("password");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
 		}
 		return Optional.of(new Login(username, password, id_user, user_id));
 	}
@@ -47,6 +53,7 @@ public class DaoLogin implements LoginDao {
 		List<Login> login=new ArrayList<>();
 		String sql="SELECT id,id_user,username,password FROM login";
 		Connection conn= DataSourceFactory.getConnection();
+		try {
 		PreparedStatement statement= conn.prepareStatement(sql);
 		ResultSet resultSet= statement.executeQuery(sql);
 		while(resultSet.next()) {
@@ -57,6 +64,12 @@ public class DaoLogin implements LoginDao {
 			Login log= new Login(username,password,id,id_user);
 			login.add(log);
 		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+		
 		return login;
 	}
 
@@ -65,20 +78,26 @@ public class DaoLogin implements LoginDao {
 		String sql1 = "INSERT INTO login(username, password,id_user) VALUES(?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DataSourceFactory.getConnection();
-		PreparedStatement statement= conn.prepareStatement(sql1);
-		String sql2 = "SELECT id From users WHERE "
-				+ "id=(SELECT MAX(id) \r\n" + 
-				"FROM users) ";
-		PreparedStatement statement2= conn.prepareStatement(sql2);
-		int id_user = 0;
-		ResultSet resultSet = statement2.executeQuery();
-		if(resultSet.next()) {
-			id_user=resultSet.getInt("id");
+		try {
+			PreparedStatement statement= conn.prepareStatement(sql1);
+			String sql2 = "SELECT id From users WHERE "
+					+ "id=(SELECT MAX(id) \r\n" + 
+					"FROM users) ";
+			PreparedStatement statement2= conn.prepareStatement(sql2);
+			int id_user = 0;
+			ResultSet resultSet = statement2.executeQuery();
+			if(resultSet.next()) {
+				id_user=resultSet.getInt("id");
+			}
+			statement.setString(1, login.getUsername());
+			statement.setString(2, login.getPassword());
+			statement.setInt(3, id_user);
+			rowInserted = statement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
 		}
-		statement.setString(1, login.getUsername());
-		statement.setString(2, login.getPassword());
-		statement.setInt(3, id_user);
-		rowInserted = statement.executeUpdate() > 0;
 		
 		return rowInserted;	
 	}
@@ -104,14 +123,21 @@ public class DaoLogin implements LoginDao {
     	String name="",surname="";
     	Connection conn= DataSourceFactory.getConnection();
     	
-    	PreparedStatement statement=conn.prepareStatement(sql);
-    	statement.setString(1, username);
-    	statement.setString(2, password);
-    	statement.setInt(3, id);
-    	ResultSet resultSet=statement.executeQuery();
-    	if(resultSet.next()) {
-    		name=resultSet.getString("name");
-    	}
+    	try {
+    		PreparedStatement statement=conn.prepareStatement(sql);
+        	statement.setString(1, username);
+        	statement.setString(2, password);
+        	statement.setInt(3, id);
+        	ResultSet resultSet=statement.executeQuery();
+        	if(resultSet.next()) {
+        		name=resultSet.getString("name");
+        	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+    	
     	return name;
     }
 	

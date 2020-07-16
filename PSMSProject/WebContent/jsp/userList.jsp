@@ -2,6 +2,20 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tab tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+</script>
+<link href="css/search.css" rel="stylesheet">
 <link href="css/view.css" rel="stylesheet">
 <title>List</title></head>
 <body>
@@ -11,11 +25,19 @@
 		
 		<main class="md1-layout_content">
 		<div class="page-content">
+<div class="wrapper">
+    <div class="search_box">
+        <div class="search_field">
+          <input  id="myInput" type="text" class="input" placeholder="Search..">
+          <i class="fas fa-search"></i>
+      </div>
+    </div>
+</div>
+<br>
 			<div class="mdl-grid center-items">
 				<div class="mdl-cell mdl-cell--4-col">
-					<div>
 						<table
-							class="mdl-data-tablemio mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+							class="mdl-data-tablemio mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" id="tab">
 							<thead>
 								<tr>
 									<th class="mdl-data-table_cell--non-numeric">NO</th>
@@ -32,7 +54,7 @@
 								<c:forEach var="user" items="${listUser}">
 									<c:set var="count" value="${count + 1}" scope="page" />
 									<tr>
-										<td class="mdl-data-table_cell--non-numeric"><c:out value="${count}" /></td>
+										<td><c:out value="${user.id}" /></td>
 										<td><c:out value="${user.name}" /></td>
 										<td><c:out value="${user.surname}" /></td>
 										<td><c:out value="${user.birthDate}" /></td>
@@ -46,7 +68,6 @@
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
 				</div>
 			</div>
 		</div>

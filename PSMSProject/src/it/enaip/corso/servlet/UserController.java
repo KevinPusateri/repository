@@ -123,7 +123,7 @@ public class UserController extends HttpServlet {
 	}
 
 	private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException, ParseException {
-		int id = Integer.parseInt(req.getParameter("1"));
+		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		String birthDate = req.getParameter("birthDate");
@@ -214,22 +214,29 @@ public class UserController extends HttpServlet {
 		     String username= req.getParameter("username");
 		     String password=req.getParameter("password");
 		     Connection conn=DataSourceFactory.getConnection();
-		     PreparedStatement statement=conn.prepareStatement(sql);
-		     ResultSet result=statement.executeQuery();
-		     boolean find=false;
-		     while(result.next()) {
-		    	 if(username.equalsIgnoreCase(result.getString("username")) && password.equalsIgnoreCase(result.getString("password"))) {
-		    		find = true;
-			    	String name = LoginDao.findUser(result.getInt("id"),username,password);
-			 		req.setAttribute("message", name);
-			 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
-			 		dispatcher.forward(req, resp);
-		    	 }
+		     try {
+			     PreparedStatement statement=conn.prepareStatement(sql);
+			     ResultSet result=statement.executeQuery();
+			     boolean find=false;
+			     while(result.next()) {
+			    	 if(username.equalsIgnoreCase(result.getString("username")) && password.equalsIgnoreCase(result.getString("password"))) {
+			    		find = true;
+				    	String name = LoginDao.findUser(result.getInt("id"),username,password);
+				 		req.setAttribute("message", name);
+				 		RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/menu.jsp");
+				 		dispatcher.forward(req, resp);
+			    	 }
+				}
+			     if(!find) {
+			    	 req.setAttribute("error", "<font color=red>Either user name or password is wrong.</font>");
+				 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+				 		dispatcher.forward(req, resp);
+			     }
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				conn.close();
 			}
-		     if(!find) {
-		    	 req.setAttribute("error", "<font color=red>Either user name or password is wrong.</font>");
-			 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
-			 		dispatcher.forward(req, resp);
-		     }
 	}
 }

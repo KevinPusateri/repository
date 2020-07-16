@@ -82,6 +82,10 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 15/07/2020
   - Completato accesso login dell'utente e caso di errore
   - Test Junit casi di errori in input nella tabella user
+  #### 16/07/2020
+  - Correzione file css login register
+  - Aggiunto input search nella lista utenti 
+  - Test Junit input dati sbagliati UserTest.java
 - Jeffrey
   #### 6/07/2020
   - Aggiunto tabella User su SqlServer e i suoi campi
@@ -114,6 +118,9 @@ Ci si incontra ogni 1 ora su skype per verificare i passi svolti e adottare deci
   #### 15/07/2020
   - Gestione delle eccezioni nei valori della classe user
   - Test Junit casi di errori in input nella tabella user
+  #### 16/07/2020
+  - Test Junit dati input corretti e sbagliati
+  - Chiusura connection con metodo close nei metodi che aprono il database
 
 
 #### Running the tests
