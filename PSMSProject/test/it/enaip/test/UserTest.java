@@ -151,15 +151,4 @@ public class UserTest {
 		assertTrue(u.getAge()<=0);
 	}
 	
-//	@Test
-//	public void TestBirtDate() throws ParseException, SQLException {
-//		java.util.Date date = new SimpleDateFormat("dd-MM-yyyy").parse("12-02-1999");
-//		DaoUser dao = new DaoUser();
-//		user.setBirthDate(null);
-//		dao.save(user);
-//		User u = dao.findUserLast();
-//		dao.delete(u);
-//		assertTrue(u.getBirthDate()==null);
-//
-//	}
 }
