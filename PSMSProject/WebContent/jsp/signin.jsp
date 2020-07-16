@@ -41,16 +41,17 @@
 				</div>
 				
 				<div class="inputBox">
-					<input type="number" name="age" id="age" placeholder="Age" required>
+					<input type="number" name="age" id="age" placeholder="Age" onBlur="getAge(this.value)" required>
 				</div>
 				
-				<label for="type">Choose a Type</label> <select name="type"
+				<div class="box">
+				<label for="type">Choose a Type</label> <select name="type" 
 										id="type">
 											<option value="CHILD">CHILD</option>
 											<option value="OWNER">OWNER</option>
 											<option value="SPOUSE">SPOUSE</option>
 									</select>
-				
+				</div>
 				<div class="inputBox">
 					<input type="text" name="username" id="username" placeholder="Username" required>
 				</div>
@@ -67,7 +68,7 @@
 			
 			
 </div>
-		<script type="text/javascript"> 
+<script type="text/javascript"> 
 	function validateForm() {
 		var p1 = document.forms["myForm"]["password_1"].value;
 		var p2 = document.forms["myForm"]["password_2"].value;
@@ -80,6 +81,31 @@
 		}
 		
 	}
+	
+	function getAge() {
+		var today = new Date();
+		var date1 = document.getElementById("birthDate").value;
+		var dob = new Date(date1);  
+		var month = dob.getMonth();
+		    var day = dob.getDate();  
+		    var age = today.getFullYear() - dob.getFullYear();
+		    if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day))
+		    {
+		      age--;
+		     }                
+		if(age < 0)
+		{
+		alert ("Invalid Date of Birth");    
+		return false;
+		}
+		else
+		{
+		    document.getElementById("age").value = age;
+		    doucment.getElementById("age").focus();
+		    alert(age);
+		    return true;
+		}
+		}
 </script>
 	
 </body>
