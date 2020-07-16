@@ -43,8 +43,10 @@ public class DaoUser implements UserDao {
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
-
 		}
+		
+		conn.close();
+
 		return Optional.of(new User(id_user, name, surname, birthDate, age, Type.valueOf(type)));
 	}
 
@@ -69,6 +71,8 @@ public class DaoUser implements UserDao {
 
 			listUser.add(user);
 		}
+		conn.close();
+
 		return listUser;
 	}
 
@@ -86,6 +90,7 @@ public class DaoUser implements UserDao {
 		statement.setString(5, user.getValueType());
 		statement.setTimestamp(6, user.getSqlTimestamp());
 		rowInserted = statement.executeUpdate() > 0;
+		conn.close();
 
 		return rowInserted;
 	}
@@ -106,6 +111,7 @@ public class DaoUser implements UserDao {
 		statement.setTimestamp(6, user.getSqlTimestamp());
 		statement.setInt(7, user.getId());
 		rowUpdated = statement.executeUpdate() > 0;
+		conn.close();
 
 		return rowUpdated;
 	}
@@ -118,6 +124,7 @@ public class DaoUser implements UserDao {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setInt(1, user.getId());
 		rowDeleted = statement.executeUpdate() > 0;
+		conn.close();
 
 		return rowDeleted;
 	}
@@ -144,7 +151,7 @@ public class DaoUser implements UserDao {
 			type = String.valueOf(User.getEnum(type));
 
 		}
-		
+		conn.close();
 		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
 	
@@ -170,9 +177,9 @@ public class DaoUser implements UserDao {
 			age = resultSet.getInt("age");
 			type = resultSet.getString("type");
 			type = String.valueOf(User.getEnum(type));
-
 		}
-		
+		conn.close();
+
 		return  new User(id_user, name, surname, birthDate, age, Type.valueOf(type));
 	}
 }

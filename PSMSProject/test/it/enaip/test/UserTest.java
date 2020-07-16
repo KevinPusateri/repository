@@ -1,15 +1,12 @@
 package it.enaip.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +36,13 @@ public class UserTest {
 		user = new User("Prova","Coc",c.getTime(),23,Type.CHILD);
 	}
 
+	
+	@Test
+	public void testDbConn() throws SQLException{
+		Connection conn = DataSourceFactory.getConnection();
+		assertEquals(conn != null,true);
+	}
+	
 	@Test
 	public void testRecordIsPresent() throws JSONException, SQLException {
 		UserController controller = new UserController();
@@ -79,8 +83,7 @@ public class UserTest {
 		dao.save(user);
 		JSONObject jobj = controller.getJson();
 		User u = JsonConverterUser.jsonToUser(jobj);
-		boolean row = dao.delete(u);
-		assertTrue(row);
+		assertTrue(dao.delete(u));
 	}
 
 	@Test
@@ -95,16 +98,16 @@ public class UserTest {
 		DaoUser dao = new DaoUser();
 		assertTrue("Error, insert not executed", dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 	}
 	
 	@Test
 	public void testNameIsNull() throws SQLException {
 		DaoUser dao = new DaoUser();
 		user.setName(null);
-		dao.save(user);
+		assertTrue(dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 		assertTrue(u.getName()==null);
 	}
 	
@@ -112,9 +115,9 @@ public class UserTest {
 	public void testNameWithNumber() throws SQLException {
 		DaoUser dao = new DaoUser();
 		user.setName("343432");
-		dao.save(user);
+		assertTrue(dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 		assertTrue( u.getName().matches(".*\\d.*"));
 	}
 	
@@ -122,19 +125,19 @@ public class UserTest {
 	public void testSurnameIsNull() throws SQLException {
 		DaoUser dao = new DaoUser();
 		user.setSurname(null);
-		dao.save(user);
+		assertTrue(dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 		assertTrue(u.getSurname()==null);
 	}
 	
 	@Test
 	public void testSurnameWithNumber() throws SQLException {
 		DaoUser dao = new DaoUser();
-		user.setSurname("343432");
-		dao.save(user);
+		user.setSurname("Pus34a432t");
+		assertTrue(dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 		assertTrue( u.getSurname().matches(".*\\d.*"));
 	}
 	
@@ -142,21 +145,21 @@ public class UserTest {
 	public void testAgeNegative() throws SQLException {
 		DaoUser dao = new DaoUser();
 		user.setAge(-23);
-		dao.save(user);
+		assertTrue(dao.save(user));
 		User u = dao.findUserLast();
-		dao.delete(u);
+		assertTrue(dao.delete(u));
 		assertTrue(u.getAge()<=0);
 	}
 	
-	@Test
-	public void TestBirtDate() throws ParseException, SQLException {
-		java.util.Date date = new SimpleDateFormat("dd-MM-yyyy").parse("12-02-1999");
-		DaoUser dao = new DaoUser();
-		user.setAge(-23);
-		dao.save(user);
-		User u = dao.findUserLast();
+//	@Test
+//	public void TestBirtDate() throws ParseException, SQLException {
+//		java.util.Date date = new SimpleDateFormat("dd-MM-yyyy").parse("12-02-1999");
+//		DaoUser dao = new DaoUser();
+//		user.setBirthDate(null);
+//		dao.save(user);
+//		User u = dao.findUserLast();
 //		dao.delete(u);
-//		assertTrue(u.getBirthDate());
-
-	}
+//		assertTrue(u.getBirthDate()==null);
+//
+//	}
 }
