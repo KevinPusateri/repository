@@ -1,15 +1,11 @@
 package it.enaip.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -157,6 +153,17 @@ public class UserTest {
 		User u = dao.findUserLast();
 //		dao.delete(u);
 //		assertTrue(u.getBirthDate());
+		
+	java.util.Date date1= new SimpleDateFormat("MM-dd-yyyy").parse("12-10-2000");
+	user.setBirthDate(date1);
+     dao.save(user);
+     User h=dao.findUserLast();
+     assertTrue(h.getBirthDate() != null);
+     
+      user.setBirthDate(null);
+      User d=dao.findUserLast();
+      assertTrue(d.getBirthDate() == null);
 
+	
 	}
 }
