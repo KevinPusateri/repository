@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONException;
@@ -29,12 +31,12 @@ public class UserTest {
 private User user;
 
 	@Before
-	public void setup() {
-		int year = 1999;
-		int mm = 02;
-		int dd = 04;
-		Date date = new Date(year,mm,dd);
-		user = new User("Prova","Coc",date,23,Type.CHILD);
+	public void setup() throws ParseException{
+		String dt = "2008-01-01";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		c.setTime(sdf.parse(dt));
+		user = new User("Prova","Coc",c.getTime(),23,Type.CHILD);
 	}
 	
 	@Test
@@ -82,44 +84,79 @@ private User user;
 	}
 	
 	@Test
-	public void testInsertCorrect() throws SQLException {
-		DaoUser dao = new DaoUser();
-		assertTrue("Errore, insert non eseguito", dao.save(user));
-	}
-	
-	@Test
-	public void testInsertError() throws SQLException {
-		DaoUser dao = new DaoUser();
-		user.setName(null);
-		dao.save(user);
-		User u = dao.findUserLast();
-		assertTrue("Nome is null", u.getName()==null);
-		
-//		assertTrue("Errore, nome vuoto", user.getName().length()>0);
-//		user.setName("das");
-//		assertTrue("Errore, contiene numero nel nome", !user.getName().matches(".*\\d.*"));
-//		
-//		user.setName(null);
-//		assertNotNull("Nome è null",user.getName());
-//
-//		assertTrue("Errore, cognome vuoto", user.getSurname().length()>0);
-//		user.setSurname("Pusa");
-//		assertTrue("Errore, contiene numero nel cognome", !user.getSurname().matches(".*\\d.*"));
-//		user.setSurname(null);
-//		assertNotNull("Nome è null",user.getSurname());
-//
-//		user.setAge(23);
-//		assertTrue("Errore, eta negativo", user.getAge()>0);
-		
-		
-//		assertTrue("Errore, insert non eseguito", dao.save(user));
-	}
-	
-	@Test
 	public void testFindAll() throws SQLException {
 		DaoUser dao = new DaoUser();
 		List<User> listUser = dao.findAll();
 		assertTrue("record is empty", !listUser.isEmpty());
 	}
-		
+	
+	@Test
+	public void testInsertCorrect() throws SQLException {
+		DaoUser dao = new DaoUser();
+		assertTrue("Error, insert not executed", dao.save(user));
+		User u = dao.findUserLast();
+		dao.delete(u);
+	}
+	
+	@Test
+	public void testNameIsNull() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setName(null);
+		dao.save(user);
+		User u = dao.findUserLast();
+		dao.delete(u);
+		assertTrue(u.getName()==null);
+	}
+	
+	@Test
+	public void testNameWithNumber() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setName("343432");
+		dao.save(user);
+		User u = dao.findUserLast();
+		dao.delete(u);
+		assertTrue( u.getName().matches(".*\\d.*"));
+	}
+	
+	@Test
+	public void testSurnameIsNull() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setSurname(null);
+		dao.save(user);
+		User u = dao.findUserLast();
+		dao.delete(u);
+		assertTrue(u.getSurname()==null);
+	}
+	
+	@Test
+	public void testSurnameWithNumber() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setSurname("343432");
+		dao.save(user);
+		User u = dao.findUserLast();
+		dao.delete(u);
+		assertTrue( u.getSurname().matches(".*\\d.*"));
+	}
+	
+	@Test
+	public void testAgeNegative() throws SQLException {
+		DaoUser dao = new DaoUser();
+		user.setAge(-23);
+		dao.save(user);
+		User u = dao.findUserLast();
+		dao.delete(u);
+		assertTrue(u.getAge()<=0);
+	}
+	
+	@Test
+	public void TestBirtDate() throws ParseException, SQLException {
+		java.util.Date date = new SimpleDateFormat("dd-MM-yyyy").parse("12-02-1999");
+		DaoUser dao = new DaoUser();
+		user.setAge(-23);
+		dao.save(user);
+		User u = dao.findUserLast();
+//		dao.delete(u);
+//		assertTrue(u.getBirthDate());
+
+	}
 }

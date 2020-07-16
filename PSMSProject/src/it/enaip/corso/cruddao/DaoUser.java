@@ -74,6 +74,7 @@ public class DaoUser implements UserDao {
 
 	@Override
 	public boolean save(User user) throws SQLException {
+		
 		String sql = "INSERT INTO users (name, surname, birthDate, age, type, time) VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DataSourceFactory.getConnection();
